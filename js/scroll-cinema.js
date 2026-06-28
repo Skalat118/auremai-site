@@ -108,16 +108,11 @@
   /* ===================== SECTION BREAKS ===================== */
   function initBreaks() {
     gsap.utils.toArray("[data-scene-break]").forEach((brk, i) => {
-      const beam = brk.querySelector(".scene-break__beam");
-      const wedge = brk.querySelector(".scene-break__wedge");
-      const dots = brk.querySelectorAll(".scene-break__dots span");
-      const dash = brk.querySelector(".scene-break__dash");
-      const hairline = brk.querySelector(".scene-break__hairline");
       const rules = brk.querySelectorAll(".scene-break__rule");
       const idx = brk.querySelector(".scene-break__idx");
       const title = brk.querySelector(".scene-break__title");
 
-      gsap.set(brk, { opacity: 0, y: i % 2 ? 16 : -16 });
+      gsap.set(brk, { opacity: 0, y: i % 2 ? 12 : -12 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -129,32 +124,12 @@
 
       tl.to(brk, { opacity: 1, y: 0, duration: 0.7, ease: EASE });
 
-      if (beam) {
-        gsap.set(beam, { scaleX: 0, transformOrigin: "left center" });
-        tl.to(beam, { scaleX: 1, duration: 1.1, ease: "power2.inOut" }, "-=0.4");
-      }
-      if (wedge) {
-        gsap.set(wedge, { scaleY: 0, transformOrigin: "top center" });
-        tl.to(wedge, { scaleY: 1, duration: 0.9, ease: EASE }, "-=0.6");
-      }
-      if (dots.length) {
-        gsap.set(dots, { scale: 0, opacity: 0 });
-        tl.to(dots, { scale: 1, opacity: 1, duration: 0.35, stagger: 0.08, ease: "back.out(2)" }, "-=0.5");
-      }
-      if (dash) {
-        gsap.set(dash, { scaleX: 0, transformOrigin: "left center" });
-        tl.to(dash, { scaleX: 1, duration: 1, ease: "power2.inOut" }, "-=0.5");
-      }
-      if (hairline) {
-        gsap.set(hairline, { scaleX: 0 });
-        tl.to(hairline, { scaleX: 1, duration: 0.8, ease: EASE }, "-=0.4");
-      }
       if (rules.length) {
         gsap.set(rules, { scaleX: 0, transformOrigin: "center" });
-        tl.to(rules, { scaleX: 1, duration: 0.7, stagger: 0.1, ease: EASE }, "-=0.5");
+        tl.to(rules, { scaleX: 1, duration: 0.75, stagger: 0.08, ease: EASE }, "-=0.45");
       }
-      if (idx) tl.from(idx, { opacity: 0, letterSpacing: "0.5em", duration: 0.6 }, "-=0.7");
-      if (title) tl.from(title, { opacity: 0, y: 10, duration: 0.5 }, "-=0.5");
+      if (idx) tl.from(idx, { opacity: 0, scale: 0.88, duration: 0.55, ease: "back.out(2)" }, "-=0.55");
+      if (title) tl.from(title, { opacity: 0, y: 8, duration: 0.5 }, "-=0.35");
     });
   }
 
