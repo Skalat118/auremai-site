@@ -70,6 +70,8 @@ const BULL_POSES = [
     slotSelector: ".how__bull-slot",
     maxPx: 720,
     fillSlot: true,
+    slotVAlign: "top",
+    slotHAlign: "left",
     saturate: 1.05,
     contrast: 1,
     brightness: 1,
