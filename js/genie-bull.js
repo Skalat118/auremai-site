@@ -33,6 +33,17 @@ const BULL_POSES = [
     brightness: 1,
   },
   {
+    id: "system",
+    src: "assets/bull-pose-system.png?v=1",
+    anchor: "slot",
+    slotSelector: ".system__bull-slot",
+    maxPx: 720,
+    fillSlot: true,
+    saturate: 1.05,
+    contrast: 1,
+    brightness: 1,
+  },
+  {
     id: "track",
     src: "assets/bull-pose-3.png?v=3",
     anchor: "slot",
@@ -54,7 +65,7 @@ const BULL_POSES = [
   },
 ];
 
-const BULL_SECTIONS = ["hero", "signal", "track", "news"];
+const BULL_SECTIONS = ["hero", "signal", "system", "track", "news"];
 const HIDE_SECTIONS = ["how", "pricing", "faq"];
 
 function cmToPx(cm) {

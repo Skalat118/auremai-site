@@ -147,6 +147,23 @@ img { max-width: 100%; display: block; }
 .system { background: var(--paper); border-top: 1px solid var(--line); position: relative; isolation: isolate; }
 .system > .container { position: relative; z-index: 1; }
 
+.system .section__head.system__head {
+  position: relative;
+  max-width: none;
+  padding-right: min(44vw, 460px);
+}
+
+.system__bull-slot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(44vw, 460px);
+  height: 100%;
+  min-height: 280px;
+  z-index: 0;
+  pointer-events: none;
+}
+
 .system__layout {
   display: grid;
   grid-template-columns: minmax(280px, 320px) 1fr;
