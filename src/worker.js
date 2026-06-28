@@ -1,8 +1,9 @@
 /*
  * Cloudflare Worker — serve static assets and proxy /api/* to the backend.
  * Browsers block HTTP API calls from HTTPS pages; the worker fetches server-side.
+ * NOTE: Cloudflare Workers cannot fetch raw IP URLs (error 1003) — use a hostname.
  */
-const BACKEND = "http://84.55.8.245:8000";
+const BACKEND = "http://api.auremai-software.com:8000";
 
 export default {
   async fetch(request, env) {
