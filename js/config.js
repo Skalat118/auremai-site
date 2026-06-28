@@ -3,10 +3,11 @@
  * Single source of truth for the live backend and external links.
  */
 
-// One-line change to point at HTTPS later. NOTE: this is plain HTTP for now —
-// browsers block HTTP calls made from an HTTPS-hosted page, so the backend
-// must move to HTTPS before this site can go live on https://.
-const API_BASE = "http://84.55.8.245:8000";
+// Local dev: hit the backend directly. Production (HTTPS): same-origin /api via Worker proxy.
+const isLocalHost =
+  typeof location !== "undefined" &&
+  (location.hostname === "localhost" || location.hostname === "127.0.0.1");
+const API_BASE = isLocalHost ? "http://84.55.8.245:8000" : "";
 
 const TELEGRAM_URL = "https://t.me/auremAIsupport";
 const TELEGRAM_HANDLE = "@auremAIsupport";

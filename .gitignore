@@ -17,3 +17,9 @@ node_modules/
 # Blender / 3D exports (regenerate locally if needed)
 *.blend
 *.blend1
+
+# wrangler / Cloudflare local
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
