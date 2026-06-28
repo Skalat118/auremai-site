@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AuremAI — The signal arrives before the price does</title>
+  <meta name="description" content="AuremAI is an algorithmic trading system for gold (XAUUSD) that reads a live macro &amp; geopolitical news signal to size every position dynamically. Watch the live account." />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/motion.css" />
+</head>
+<body>
+  <canvas id="scene-canvas" class="scene-canvas" aria-hidden="true"></canvas>
+  <div id="genie-bull-stage" class="genie-bull-stage" aria-hidden="true" hidden>
+    <canvas id="genie-bull-canvas"></canvas>
+    <img id="genie-bull-source" alt="" hidden />
+  </div>
+  <!-- ============================ NAV ============================ -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="brand" href="#hero" aria-label="AuremAI home">
+        <img class="brand__mark" src="assets/logo.svg" alt="" />
+        <span class="brand__word"><span class="brand__aurem">Aurem</span><span class="brand__ai">AI</span></span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#signal">The Signal</a>
+        <a href="#track">Track Record</a>
+        <a href="#news">What's moving gold</a>
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="nav__right">
+        <span class="nav__ticker" id="navTicker" aria-live="polite">
+          <span class="nav__ticker-label">XAU/USD</span>
+          <span class="nav__ticker-price" data-price>—</span>
+        </span>
+        <a class="btn btn--gold" href="#pricing" data-macro-action data-confirm-label="Tap again — go to pricing">Get access</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================ HERO ============================ -->
+    <section class="hero" id="hero" data-bull-anchor>
+      <div class="section__bull" id="hero-bull-mount" aria-hidden="true"></div>
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="hero__scrim" aria-hidden="true"></div>
+      <div class="hero__inner">
+        <div class="hero__copy" data-reveal-group>
+          <span class="eyebrow eyebrow--light" data-reveal>Algorithmic gold trading · XAUUSD</span>
+          <h1 class="hero__headline" data-hero-headline>
+            <span class="hero__line"><span class="hero__word">The</span> <span class="hero__word">signal</span> <span class="hero__word">arrives</span></span>
+            <span class="hero__line"><span class="hero__word">before</span> <span class="hero__word">the</span> <span class="hero__word">price</span> <span class="hero__word">does.</span></span>
+          </h1>
+          <p class="hero__sub" data-reveal>
+            AuremAI reads a live signal built from macro and geopolitical news, then
+            sizes every gold position to match it — cautious when the picture is
+            unclear, assertive when the signal is strong.
+          </p>
+
+          <div class="ticker hover-glow" id="heroTicker" aria-live="polite" data-reveal>
+            <div class="ticker__main">
+              <span class="ticker__symbol">XAU/USD</span>
+              <span class="ticker__price" data-price>—</span>
+            </div>
+            <span class="ticker__change" data-change>Connecting to live feed…</span>
+          </div>
+
+          <div class="hero__cta" data-reveal>
+            <a class="btn btn--gold btn--lg" href="#track" data-macro-action data-confirm-label="Tap again — see live results">See live results</a>
+            <a class="btn btn--ghost btn--lg" href="#pricing" data-macro-action data-confirm-label="Tap again — get access">Get access</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="scene-break scene-break--signal" data-scene-break aria-hidden="true">
+      <div class="scene-break__inner">
+        <span class="scene-break__idx">01</span>
+        <div class="scene-break__track"><span class="scene-break__beam"></span></div>
+        <span class="scene-break__title">The Signal</span>
+      </div>
+    </div>
+
+    <!-- ============================ THE SIGNAL ============================ -->
+    <section class="section signal" id="signal" data-scene="signal" data-bull-anchor>
+      <div class="section__bull" id="signal-bull-mount" aria-hidden="true"></div>
+      <div class="container">
+        <div class="section__head signal__head" data-reveal-group>
+          <div class="signal__bull-slot" aria-hidden="true"></div>
+          <span class="eyebrow" data-reveal>The Signal</span>
+          <h2 data-reveal>One number that reads the whole room.</h2>
+          <p class="section__lead" data-reveal>
+            A monitoring process scans for high-relevance, gold-moving news every few
+            hours — Fed and FOMC policy, CPI/PCE/NFP and other US macro data, major
+            geopolitical shifts, and sudden unexplained moves in gold. A strict filter
+            throws out speculation and stale news.
+          </p>
+        </div>
+
+        <div class="signal__grid" data-reveal-group>
+          <div class="signal__gauge-row">
+            <div class="gauge-card card hover-lift hover-glow" data-reveal="left">
+            <div class="gauge" data-gauge>
+              <svg viewBox="0 0 200 120" class="gauge__svg" role="img" aria-label="Live signal gauge">
+                <path class="gauge__track" d="M20 110 A 80 80 0 0 1 180 110" />
+                <path class="gauge__fill" data-gauge-fill d="M20 110 A 80 80 0 0 1 180 110" />
+                <line class="gauge__needle" data-gauge-needle x1="100" y1="110" x2="100" y2="40" />
+                <circle class="gauge__hub" cx="100" cy="110" r="6" />
+              </svg>
+              <div class="gauge__readout">
+                <span class="gauge__bias" data-bias-label>—</span>
+                <span class="gauge__meta" data-bias-meta>Reading the signal…</span>
+              </div>
+            </div>
+            <div class="gauge__bars">
+              <div class="metric">
+                <span class="metric__k">Direction</span>
+                <span class="metric__v" data-directional>—</span>
+                <span class="metric__hint">0 = bearish · 50 = neutral · 100 = bullish</span>
+              </div>
+              <div class="metric">
+                <span class="metric__k">Strength</span>
+                <span class="metric__v" data-strength>—</span>
+                <span class="metric__hint">how strong the signal is, regardless of direction</span>
+              </div>
+            </div>
+            <p class="gauge__note">Updates automatically — no manual input. <span data-bias-updated></span></p>
+            </div>
+          </div>
+
+          <div class="signal__explain" data-reveal="up">
+            <ul class="feature-list">
+              <li data-reveal>
+                <h3>Weighted by what actually moves gold</h3>
+                <p>Each item is tagged by category, in order of weight: <strong>Fed policy</strong> &rarr; key macro &rarr; major geopolitics &rarr; secondary macro &rarr; general — plus a bullish, bearish, or neutral bias.</p>
+              </li>
+              <li data-reveal>
+                <h3>Time-decay, not hard cutoffs</h3>
+                <p>A news item's influence halves roughly every six hours, so the signal glides smoothly instead of jumping when an item ages out.</p>
+              </li>
+              <li data-reveal>
+                <h3>From signal to position</h3>
+                <p>The trading system reads the signal per pending order and adjusts the <strong>risk tier — low, medium, or high</strong> — and the take-profit distance. Trades that run against the current signal use a separate, lower fixed tier.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="signal__pipeline" data-pipeline aria-hidden="true">
+          <span class="signal__pipe-node">Fed policy</span>
+          <span class="signal__pipe-arrow">→</span>
+          <span class="signal__pipe-node">Key macro</span>
+          <span class="signal__pipe-arrow">→</span>
+          <span class="signal__pipe-node">Geopolitics</span>
+          <span class="signal__pipe-arrow">→</span>
+          <span class="signal__pipe-node">Time decay</span>
+          <span class="signal__pipe-arrow">→</span>
+          <span class="signal__pipe-node">Position sizing</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="scene-break scene-break--track" data-scene-break aria-hidden="true">
+      <div class="scene-break__inner scene-break__inner--data">
+        <span class="scene-break__idx">02</span>
+        <div class="scene-break__dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+        <span class="scene-break__title">Track Record</span>
+      </div>
+    </div>
+
+    <!-- ============================ TRACK RECORD ============================ -->
+    <section class="section track" id="track" data-scene="track">
+      <div class="section__bull" id="track-bull-mount" aria-hidden="true"></div>
+      <div class="container">
+        <div class="section__head track__head" data-reveal-group>
+          <div class="track__bull-slot" id="track-bull-anchor" aria-hidden="true"></div>
+          <div class="track__head-copy">
+            <span class="eyebrow" data-reveal>Track Record</span>
+            <h2 data-reveal>Don't take our word for it. Watch the account.</h2>
+            <p class="section__lead" data-reveal>
+              Equity, balance, and history below are exported automatically from a live
+              trading account and update on this page on their own. This is verifiable
+              proof, not a sales claim.
+            </p>
+          </div>
+        </div>
+
+        <div class="track__stale" data-stale hidden>
+          <strong>Heads up:</strong> the live feed is reporting stale data right now —
+          the numbers below may be behind. They'll refresh automatically once the
+          account reports in again.
+        </div>
+
+        <div class="track__grid" data-reveal-group>
+          <div class="stat-card card hover-lift hover-glow" data-reveal>
+            <span class="stat-card__k">Equity</span>
+            <span class="stat-card__v" data-equity>—</span>
+          </div>
+          <div class="stat-card card hover-lift hover-glow" data-reveal>
+            <span class="stat-card__k">Balance</span>
+            <span class="stat-card__v" data-balance>—</span>
+          </div>
+          <div class="stat-card card stat-card--meta hover-lift hover-glow" data-reveal>
+            <span class="stat-card__k">Last reported</span>
+            <span class="stat-card__v stat-card__v--sm" data-perf-updated>—</span>
+            <span class="stat-card__status" data-perf-status></span>
+          </div>
+        </div>
+
+        <div class="chart-card card hover-lift hover-glow" data-reveal="scale">
+          <div class="chart-card__head">
+            <h3>Equity &amp; balance history</h3>
+            <div class="chart-legend">
+              <span class="chart-legend__item chart-legend__item--equity">Equity</span>
+              <span class="chart-legend__item chart-legend__item--balance">Balance</span>
+            </div>
+          </div>
+          <div class="chart" data-chart>
+            <svg class="chart__svg" viewBox="0 0 800 280" preserveAspectRatio="none" aria-label="Equity and balance over time"></svg>
+            <p class="chart__empty" data-chart-empty>Loading live history…</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="scene-break scene-break--news" data-scene-break aria-hidden="true">
+      <div class="scene-break__inner scene-break__inner--split">
+        <span class="scene-break__rule"></span>
+        <span class="scene-break__idx">03</span>
+        <span class="scene-break__rule"></span>
+      </div>
+      <span class="scene-break__title scene-break__title--center">What's moving gold</span>
+    </div>
+
+    <!-- ============================ NEWS ============================ -->
+    <section class="section news" id="news" data-scene="news">
+      <div class="section__bull" id="news-bull-mount" aria-hidden="true"></div>
+      <div class="container">
+        <div class="section__head news__head" data-reveal-group>
+          <div class="news__bull-slot" id="news-bull-anchor" aria-hidden="true"></div>
+          <span class="eyebrow" data-reveal>What's moving gold</span>
+          <h2 data-reveal>See exactly what's feeding the signal.</h2>
+          <p class="section__lead" data-reveal>
+            This is the transparency layer. Every item below is something the system
+            actually weighed — with its category, directional bias, and time.
+          </p>
+        </div>
+        <div class="news__feed" data-reveal>
+          <div class="news__scroller" data-news tabindex="0" aria-label="Latest news items">
+            <p class="news__empty">Loading the latest items…</p>
+          </div>
+          <div class="news__rail" aria-hidden="true">
+            <span class="news__rail-fill"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="scene-break scene-break--how" data-scene-break aria-hidden="true">
+      <div class="scene-break__wedge"></div>
+      <div class="scene-break__inner">
+        <span class="scene-break__idx">04</span>
+        <span class="scene-break__title">How it works</span>
+      </div>
+    </div>
+
+    <!-- ============================ HOW IT WORKS ============================ -->
+    <section class="section how" id="how" data-scene="how" data-bull-anchor>
+      <div class="container">
+        <div class="section__head" data-reveal-group>
+          <span class="eyebrow" data-reveal>How it works</span>
+          <h2 data-reveal>Up and running in three steps.</h2>
+        </div>
+        <ol class="steps" data-reveal-group>
+          <li class="step" data-reveal>
+            <span class="step__n">01</span>
+            <h3>Choose a plan and get access</h3>
+            <p>Pick the term that suits you. We confirm your access and get you set up over Telegram.</p>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__n">02</span>
+            <h3>Install on your MetaTrader 5 terminal</h3>
+            <p>The system runs on your own MT5 terminal. We guide the whole setup with you, step by step, over Telegram.</p>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__n">03</span>
+            <h3>The system reads the signal and manages risk</h3>
+            <p>From there it runs on its own: reading the live signal and adjusting position size and take-profit on every order, automatically.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <div class="scene-break scene-break--pricing" data-scene-break aria-hidden="true">
+      <div class="scene-break__inner">
+        <span class="scene-break__idx">05</span>
+        <div class="scene-break__dash"></div>
+        <span class="scene-break__title">Pricing</span>
+      </div>
+    </div>
+
+    <!-- ============================ PRICING ============================ -->
+    <section class="section pricing" id="pricing" data-scene="pricing" data-bull-anchor>
+      <div class="container">
+        <div class="section__head" data-reveal-group>
+          <div>
+            <span class="eyebrow" data-reveal>Pricing</span>
+            <h2 data-reveal>Pick your term. Cancel the rest of the noise.</h2>
+            <p class="section__lead" data-reveal>
+              Every plan is the same system and the same live signal — longer terms
+              simply cost less per month.
+            </p>
+          </div>
+        </div>
+
+        <div class="plans" data-reveal-group>
+          <div class="plan card hover-lift hover-glow" data-reveal>
+            <h3 class="plan__name">Monthly</h3>
+            <div class="plan__price"><span class="plan__cur">€</span>39<span class="plan__per">/mo</span></div>
+            <p class="plan__note">Billed monthly. Try it on the live signal.</p>
+            <ul class="plan__features">
+              <li>Full access to the AuremAI system</li>
+              <li>Live signal-driven position sizing</li>
+              <li>Setup &amp; support over Telegram</li>
+            </ul>
+            <!-- TODO: replace with Stripe Checkout -->
+            <a class="btn btn--ghost btn--block" href="#" data-checkout="monthly" data-macro-action data-confirm-label="Tap again — open Telegram">Get Started</a>
+          </div>
+
+          <div class="plan card plan--featured hover-lift hover-glow" data-reveal>
+            <span class="plan__badge">Best value · ≈€33/mo</span>
+            <h3 class="plan__name">Quarterly</h3>
+            <div class="plan__price"><span class="plan__cur">€</span>99<span class="plan__per">/3mo</span></div>
+            <p class="plan__note">Billed every three months.</p>
+            <ul class="plan__features">
+              <li>Everything in Monthly</li>
+              <li>Priority Telegram support</li>
+              <li>Best balance of cost and commitment</li>
+            </ul>
+            <!-- TODO: replace with Stripe Checkout -->
+            <a class="btn btn--gold btn--block" href="#" data-checkout="quarterly" data-macro-action data-confirm-label="Tap again — open Telegram">Get Started</a>
+          </div>
+
+          <div class="plan card hover-lift hover-glow" data-reveal>
+            <h3 class="plan__name">Annual</h3>
+            <div class="plan__price"><span class="plan__cur">€</span>299<span class="plan__per">/yr</span></div>
+            <p class="plan__note">Billed yearly · ≈€25/mo, the lowest rate.</p>
+            <ul class="plan__features">
+              <li>Everything in Quarterly</li>
+              <li>Lowest monthly cost</li>
+              <li>A full year on the live signal</li>
+            </ul>
+            <!-- TODO: replace with Stripe Checkout -->
+            <a class="btn btn--ghost btn--block" href="#" data-checkout="annual" data-macro-action data-confirm-label="Tap again — open Telegram">Get Started</a>
+          </div>
+        </div>
+        <p class="pricing__foot">
+          Payment links open a Telegram conversation for now. Card checkout is coming soon.
+        </p>
+      </div>
+    </section>
+
+    <div class="scene-break scene-break--faq" data-scene-break aria-hidden="true">
+      <div class="scene-break__inner scene-break__inner--minimal">
+        <span class="scene-break__hairline"></span>
+        <span class="scene-break__idx">06</span>
+      </div>
+    </div>
+
+    <!-- ============================ FAQ ============================ -->
+    <section class="section faq" id="faq" data-scene="faq">
+      <div class="container container--narrow">
+        <div class="section__head">
+          <span class="eyebrow">FAQ</span>
+          <h2>Questions, answered straight.</h2>
+        </div>
+        <div class="faq__list" data-reveal-group>
+          <details class="faq__item" data-reveal>
+            <summary>What is AuremAI?</summary>
+            <p>AuremAI is an algorithmic trading system for gold (XAUUSD). It reads a live signal built from macro and geopolitical news and uses it to size every position dynamically. What you're buying is access to run the system, delivered and supported over Telegram.</p>
+          </details>
+          <details class="faq__item" data-reveal>
+            <summary>How is the signal calculated?</summary>
+            <p>A monitoring process scans for high-relevance gold news every few hours and tags each item with a category (Fed policy carries the most weight, down through key macro, major geopolitics, secondary macro, and general) and a bullish, bearish, or neutral bias. A live endpoint blends recent items using time-decay weighting — influence halves roughly every six hours — into a single bias label, a directional score, and a strength reading.</p>
+          </details>
+          <details class="faq__item" data-reveal>
+            <summary>Can I see results before I buy?</summary>
+            <p>Yes. The <a href="#track">Track Record</a> section above shows a live trading account — equity, balance, and history — that updates on its own. No purchase or sign-up required to watch it.</p>
+          </details>
+          <details class="faq__item" data-reveal>
+            <summary>What risk is involved?</summary>
+            <p>Trading carries real risk, including the loss of capital. AuremAI sizes positions to manage risk — using low, medium, and high risk tiers depending on signal strength — but managing risk is not the same as removing it. No system can guarantee a profit, and you should never trade money you can't afford to lose.</p>
+          </details>
+          <details class="faq__item" data-reveal>
+            <summary>How do I receive the system after paying?</summary>
+            <p>Everything happens over Telegram. After your access is confirmed, we walk you through installing and configuring the system on your own MetaTrader 5 terminal.</p>
+          </details>
+          <details class="faq__item" data-reveal>
+            <summary>What's your refund policy?</summary>
+            <p>Refunds are handled case by case. Reach out on <a href="#" data-telegram>Telegram</a> and we'll talk it through with you directly.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="brand__word brand__word--light"><img class="footer__mark" src="assets/logo.svg" alt="" /><span class="brand__aurem">Aurem</span><span class="brand__ai">AI</span></span>
+        <p class="footer__tag">The signal arrives before the price does.</p>
+        <a class="btn btn--gold" href="#" data-telegram data-macro-action data-confirm-label="Tap again — open Telegram">Talk to us on Telegram</a>
+      </div>
+      <p class="footer__disclaimer">
+        Trading in financial instruments carries a risk of loss, including total loss
+        of capital. Performance figures on this page are drawn from a live account and
+        update automatically; they do not constitute a guarantee of return or
+        personalized financial advice. Past performance is not indicative of future
+        results.
+      </p>
+      <p class="footer__copy">© <span data-year></span> AuremAI. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/motion.js"></script>
+  <script src="js/scene-three.js"></script>
+  <script src="js/scroll-cinema.js"></script>
+  <script src="js/genie-bull.js"></script>
+</body>
+</html>

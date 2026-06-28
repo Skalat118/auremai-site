@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0c254"/>
+      <stop offset="1" stop-color="#e3a82b"/>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="170" fill="rgba(255,255,255,0.06)" stroke="rgba(240,194,84,0.4)" stroke-width="2" stroke-dasharray="6 8"/>
+  <g transform="translate(200 195)">
+    <path d="M-90 -40c-26-16-46-8-46-8s12 38 46 44m180-36c26-16 46-8 46-8s-12 38-46 44" fill="none" stroke="url(#g)" stroke-width="14" stroke-linecap="round"/>
+    <ellipse cx="0" cy="20" rx="92" ry="100" fill="url(#g)"/>
+    <circle cx="-34" cy="0" r="13" fill="#0a3729"/>
+    <circle cx="34" cy="0" r="13" fill="#0a3729"/>
+    <ellipse cx="0" cy="62" rx="40" ry="28" fill="#0a3729" opacity="0.85"/>
+    <circle cx="-15" cy="60" r="6" fill="url(#g)"/>
+    <circle cx="15" cy="60" r="6" fill="url(#g)"/>
+  </g>
+  <text x="200" y="380" text-anchor="middle" font-family="monospace" font-size="15" fill="rgba(240,194,84,0.7)">bull mascot  drop in render</text>
+</svg>
