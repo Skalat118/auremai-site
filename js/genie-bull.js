@@ -63,10 +63,21 @@ const BULL_POSES = [
     slotVAlign: "top",
     slotHAlign: "right",
   },
+  {
+    id: "how",
+    src: "assets/bull-pose-how.png?v=1",
+    anchor: "slot",
+    slotSelector: ".how__bull-slot",
+    maxPx: 720,
+    fillSlot: true,
+    saturate: 1.05,
+    contrast: 1,
+    brightness: 1,
+  },
 ];
 
-const BULL_SECTIONS = ["hero", "signal", "system", "track", "news"];
-const HIDE_SECTIONS = ["how", "pricing", "faq"];
+const BULL_SECTIONS = ["hero", "signal", "system", "track", "news", "how"];
+const HIDE_SECTIONS = ["pricing", "faq"];
 
 function cmToPx(cm) {
   return (cm * 96) / 2.54;
