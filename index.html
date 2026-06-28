@@ -44,7 +44,6 @@
       </div>
     </div>
   </header>
-  <p class="nav__powered">Powered by TFS</p>
 
   <main>
     <!-- ============================ HERO ============================ -->
@@ -200,34 +199,72 @@
           <li class="trust-strip__item trust-strip__item--no" data-reveal>No grid system</li>
         </ul>
 
-        <div class="system__grid" data-reveal-group>
-          <article class="system-card card hover-lift" data-reveal>
-            <h3>Smart execution</h3>
-            <p>
-              Pending orders sit at structural levels. The system waits for price
-              confirmation before filling — no chasing, no impulsive entries.
-            </p>
-          </article>
-          <article class="system-card card hover-lift" data-reveal>
-            <h3>Trailing protection</h3>
-            <p>
-              Once in a trade, a dynamic trailing stop locks in gains as the move
-              develops, without cutting winners short too early.
-            </p>
-          </article>
-          <article class="system-card card hover-lift" data-reveal>
-            <h3>Risk your way</h3>
-            <p>
-              Fully customisable: fixed lot size, or percentage-based risk to
-              harness compound growth over time — on your terms.
-            </p>
-          </article>
+        <div class="system__layout" data-reveal-group>
+          <aside class="system__panel card hover-lift hover-glow" data-reveal="left">
+            <span class="system__panel-label">Execution loop</span>
+            <ol class="system__loop" aria-label="How each trade runs">
+              <li><span class="system__loop-k">1</span> Map liquidity zones</li>
+              <li><span class="system__loop-k">2</span> Place pending order</li>
+              <li><span class="system__loop-k">3</span> Wait for confirmation</li>
+              <li><span class="system__loop-k">4</span> Trail stop &amp; manage exit</li>
+            </ol>
+            <div class="system__metrics">
+              <div class="metric">
+                <span class="metric__k">Entry style</span>
+                <span class="metric__v">Breakout</span>
+                <span class="metric__hint">confirmed fills only — no market chasing</span>
+              </div>
+              <div class="metric">
+                <span class="metric__k">Risk model</span>
+                <span class="metric__v">Fixed / %</span>
+                <span class="metric__hint">lot size or % equity per trade</span>
+              </div>
+            </div>
+          </aside>
+
+          <ul class="feature-list system__features">
+            <li class="system-feature card hover-lift hover-glow" data-reveal>
+              <span class="system-feature__idx" aria-hidden="true">01</span>
+              <h3>Smart execution</h3>
+              <p>
+                Pending orders sit at structural levels. The system waits for price
+                confirmation before filling — no chasing, no impulsive entries.
+              </p>
+            </li>
+            <li class="system-feature card hover-lift hover-glow" data-reveal>
+              <span class="system-feature__idx" aria-hidden="true">02</span>
+              <h3>Trailing protection</h3>
+              <p>
+                Once in a trade, a dynamic trailing stop locks in gains as the move
+                develops, without cutting winners short too early.
+              </p>
+            </li>
+            <li class="system-feature card hover-lift hover-glow" data-reveal>
+              <span class="system-feature__idx" aria-hidden="true">03</span>
+              <h3>Risk your way</h3>
+              <p>
+                Fully customisable: fixed lot size, or percentage-based risk to
+                harness compound growth over time — on your terms.
+              </p>
+            </li>
+          </ul>
         </div>
 
-        <p class="system__foot" data-reveal>
-          A structured, controlled, and professional approach — built to trade
-          strategically and stress-free.
-        </p>
+        <div class="flow-pipeline system__pipeline" data-reveal aria-hidden="true">
+          <span class="flow-pipeline__node">Liquidity zones</span>
+          <span class="flow-pipeline__arrow">→</span>
+          <span class="flow-pipeline__node">Pending order</span>
+          <span class="flow-pipeline__arrow">→</span>
+          <span class="flow-pipeline__node">Confirmation</span>
+          <span class="flow-pipeline__arrow">→</span>
+          <span class="flow-pipeline__node">Trailing stop</span>
+          <span class="flow-pipeline__arrow">→</span>
+          <span class="flow-pipeline__node">Take profit / SL</span>
+        </div>
+
+        <blockquote class="system__quote" data-reveal>
+          <p>A structured, controlled, and professional approach — built to trade strategically and stress-free.</p>
+        </blockquote>
 
         <div class="section__cta section__cta--center" data-reveal>
           <a class="btn btn--gold btn--lg" href="#" data-telegram data-macro-action data-confirm-label="Tap again — open @auremAIsupport">@auremAIsupport</a>
@@ -591,6 +628,7 @@
       <div class="footer__brand">
         <span class="brand__word brand__word--light"><img class="footer__mark" src="assets/logo.svg" alt="" /><span class="brand__aurem">Aurem</span><span class="brand__ai">AI</span></span>
         <p class="footer__tag">The signal arrives before the price does.</p>
+        <p class="footer__powered">Powered by <strong>TFS</strong></p>
         <a class="btn btn--gold" href="#" data-telegram data-macro-action data-confirm-label="Tap again — open @auremAIsupport">@auremAIsupport</a>
       </div>
       <p class="footer__disclaimer">
@@ -612,7 +650,7 @@
   <script src="js/app.js?v=20260628f"></script>
   <script src="js/motion.js"></script>
   <script src="js/scene-three.js"></script>
-  <script src="js/scroll-cinema.js?v=20260703"></script>
+  <script src="js/scroll-cinema.js?v=20260704"></script>
   <script src="js/genie-bull.js"></script>
 </body>
 </html>

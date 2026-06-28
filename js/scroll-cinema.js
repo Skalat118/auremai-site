@@ -214,13 +214,30 @@
       scrollTrigger: { trigger: "#system .trust-strip", start: "top 88%" },
     });
 
-    gsap.from("#system .system-card", {
+    gsap.from("#system .system-feature", {
       y: 28,
       opacity: 0,
       stagger: 0.1,
       duration: 0.7,
       ease: EASE,
-      scrollTrigger: { trigger: "#system .system__grid", start: "top 85%" },
+      scrollTrigger: { trigger: "#system .system__features", start: "top 85%" },
+    });
+
+    gsap.from("#system .system__panel", {
+      x: -24,
+      opacity: 0,
+      duration: 0.75,
+      ease: EASE,
+      scrollTrigger: { trigger: "#system .system__layout", start: "top 85%" },
+    });
+
+    gsap.from("#system .system__pipeline .flow-pipeline__node", {
+      y: 12,
+      opacity: 0,
+      stagger: 0.06,
+      duration: 0.5,
+      ease: EASE,
+      scrollTrigger: { trigger: "#system .system__pipeline", start: "top 90%" },
     });
   }
 
