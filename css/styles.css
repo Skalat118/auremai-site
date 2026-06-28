@@ -149,16 +149,30 @@ img { max-width: 100%; display: block; }
 
 .system__layout {
   display: grid;
-  grid-template-columns: minmax(260px, 340px) 1fr;
-  gap: clamp(24px, 3vw, 36px);
-  align-items: start;
+  grid-template-columns: minmax(280px, 320px) 1fr;
+  gap: clamp(20px, 2.5vw, 28px);
+  align-items: stretch;
   margin-top: 8px;
 }
 
 .system__panel {
-  padding: 28px 26px;
-  position: sticky;
-  top: 96px;
+  padding: 24px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  align-self: stretch;
+}
+
+.system__panel .system__loop {
+  flex: 1 1 auto;
+}
+
+.system__metrics {
+  display: grid;
+  gap: 12px;
+  padding-top: 18px;
+  margin-top: auto;
+  border-top: 1px solid var(--line);
 }
 
 .system__panel-label {
@@ -204,21 +218,23 @@ img { max-width: 100%; display: block; }
   background: rgba(212, 168, 67, 0.08);
 }
 
-.system__metrics {
-  display: grid;
-  gap: 12px;
-  padding-top: 4px;
-  border-top: 1px solid var(--line);
-}
-
 .system__features {
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 18px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .system-feature {
   position: relative;
-  padding: 24px 24px 24px 72px;
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 22px 24px 22px 72px;
   margin: 0;
 }
 
@@ -279,6 +295,12 @@ img { max-width: 100%; display: block; }
   font-size: 0.85rem;
   color: var(--ink-muted);
   opacity: 0.7;
+}
+
+.system__pipeline {
+  margin-top: 40px;
+  position: relative;
+  z-index: 1;
 }
 
 .system__quote {
@@ -1185,7 +1207,8 @@ img { max-width: 100%; display: block; }
   .gauge-card .gauge__note { grid-column: 1; }
   .signal__explain .feature-list { grid-template-columns: 1fr; }
   .system__layout { grid-template-columns: 1fr; }
-  .system__panel { position: static; }
+  .system__panel { min-height: 0; }
+  .system-feature { flex: none; }
   .how__grid { grid-template-columns: 1fr; padding-right: 0; }
   .how__timeline { display: none; }
   .steps { grid-template-columns: 1fr; }
