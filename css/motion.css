@@ -77,10 +77,6 @@ main,
   margin-right: auto;
 }
 
-.signal {
-  padding-top: 0;
-}
-
 .signal::before {
   content: "";
   position: absolute;
