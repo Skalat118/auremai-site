@@ -191,6 +191,39 @@
     });
   }
 
+  /* ===================== SYSTEM — strategy cards ===================== */
+  function initSystem() {
+    const sec = document.getElementById("system");
+    if (!sec) return;
+
+    gsap.from("#system .section__head > *", {
+      y: 32,
+      opacity: 0,
+      stagger: 0.1,
+      duration: 0.75,
+      ease: EASE,
+      scrollTrigger: { trigger: sec, start: "top 78%" },
+    });
+
+    gsap.from("#system .trust-strip__item", {
+      y: 16,
+      opacity: 0,
+      stagger: 0.08,
+      duration: 0.55,
+      ease: EASE,
+      scrollTrigger: { trigger: "#system .trust-strip", start: "top 88%" },
+    });
+
+    gsap.from("#system .system-card", {
+      y: 28,
+      opacity: 0,
+      stagger: 0.1,
+      duration: 0.7,
+      ease: EASE,
+      scrollTrigger: { trigger: "#system .system__grid", start: "top 85%" },
+    });
+  }
+
   /* ===================== TRACK — stat flip + chart draw ===================== */
   function initTrack() {
     const sec = document.getElementById("track");
@@ -205,7 +238,8 @@
       scrollTrigger: { trigger: sec, start: "top 75%" },
     });
 
-    gsap.utils.toArray(".stat-card").forEach((card, i) => {
+    gsap.utils.toArray("#track .stat-card").forEach((card, i) => {
+      if (card.hidden) return;
       gsap.from(card, {
         rotateX: -18,
         y: 40,
@@ -218,41 +252,47 @@
       });
     });
 
-    gsap.from(".chart-card", {
+    gsap.from("#track .chart-card:not(.chart-card--dd)", {
       y: 50,
       opacity: 0,
       scale: 0.96,
       duration: 1,
       ease: EASE,
-      scrollTrigger: { trigger: ".chart-card", start: "top 82%" },
+      scrollTrigger: { trigger: "#track .chart-card:not(.chart-card--dd)", start: "top 82%" },
     });
+
+    gsap.from("#track .chart-card--dd", {
+      y: 36,
+      opacity: 0,
+      duration: 0.85,
+      ease: EASE,
+      scrollTrigger: { trigger: "#track .chart-card--dd", start: "top 88%" },
+    });
+
+    const monthly = document.querySelector("#track .monthly-card");
+    if (monthly && !monthly.hidden) {
+      gsap.from(monthly, {
+        y: 40,
+        opacity: 0,
+        duration: 0.85,
+        ease: EASE,
+        scrollTrigger: { trigger: monthly, start: "top 88%" },
+      });
+    }
   }
 
   function bindChartDraw(svg) {
     if (!svg || svg.dataset.cinemaBound) return;
     svg.dataset.cinemaBound = "1";
-    const paths = svg.querySelectorAll("path[stroke]");
-    paths.forEach((path) => {
-      const len = path.getTotalLength?.() || 800;
-      gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
-      gsap.to(path, {
-        strokeDashoffset: 0,
-        duration: 1.6,
-        ease: "power2.inOut",
-        scrollTrigger: {
-          trigger: ".chart-card",
-          start: "top 70%",
-          toggleActions: "play none none none",
-        },
-      });
+
+    svg.querySelectorAll(".chart__line, .chart__line--anchor").forEach((path) => {
+      gsap.killTweensOf(path);
+      gsap.set(path, { strokeDasharray: "none", strokeDashoffset: 0, opacity: 1, clearProps: "strokeDasharray,strokeDashoffset" });
     });
-    const fill = svg.querySelector("path[fill^='url']");
-    if (fill) {
-      gsap.from(fill, {
-        opacity: 0,
-        duration: 1.2,
-        scrollTrigger: { trigger: ".chart-card", start: "top 68%" },
-      });
+
+    const ddBars = svg.querySelectorAll(".chart__dd-bar");
+    if (ddBars.length) {
+      gsap.set(ddBars, { opacity: 1, scaleY: 1, transformOrigin: "50% 100%" });
     }
   }
 
@@ -262,20 +302,13 @@
     const fresh = items.filter((el) => !el.dataset.cinemaBound);
     if (!fresh.length) return;
     fresh.forEach((el) => { el.dataset.cinemaBound = "1"; });
-    gsap.set(fresh, { opacity: 0, y: 20 });
-    ScrollTrigger.batch(fresh, {
-      start: "top 92%",
-      onEnter: (batch) => {
-        gsap.to(batch, {
-          opacity: 1,
-          y: 0,
-          duration: 0.65,
-          stagger: 0.06,
-          ease: EASE,
-          overwrite: true,
-        });
-      },
-      once: true,
+
+    gsap.from(fresh, {
+      opacity: 0,
+      y: 12,
+      duration: 0.4,
+      stagger: 0.035,
+      ease: EASE,
     });
   }
 
@@ -404,6 +437,7 @@
   /* ===================== GENERIC data-reveal fallback ===================== */
   function initRevealFallback() {
     $$("[data-reveal]").forEach((el) => {
+      if (el.hidden) return;
       if (el.closest("#hero")) return;
       const dir = el.getAttribute("data-reveal");
       const from = { opacity: 0 };
@@ -487,6 +521,7 @@
     initBreaks();
     initSectionWipes();
     initSignal();
+    initSystem();
     initTrack();
     initNews();
     initHow();
@@ -500,7 +535,14 @@
     revealVisibleNow();
   });
 
-  window.AuremScroll = { bindChartDraw, registerNewsItems };
+  function revealElement(el) {
+    if (!el) return;
+    gsap.set(el, { opacity: 1, x: 0, y: 0, scale: 1, rotateX: 0, clearProps: "transform" });
+    el.classList.add("is-revealed");
+    ScrollTrigger.refresh();
+  }
+
+  window.AuremScroll = { bindChartDraw, registerNewsItems, revealElement, revealVisibleNow };
 })();
 
 if (typeof gsap === "undefined") {

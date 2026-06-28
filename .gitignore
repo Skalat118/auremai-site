@@ -1,0 +1,19 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# Env / secrets (never commit)
+.env
+.env.*
+*.pem
+
+# Local server / tooling
+node_modules/
+.npm/
+
+# Blender / 3D exports (regenerate locally if needed)
+*.blend
+*.blend1

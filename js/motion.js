@@ -41,27 +41,30 @@ function initScrollSpy() {
 
 /* ------------------------- scroll progress ------------------------- */
 function initScrollProgress() {
-  const bar = document.createElement("div");
-  bar.className = "scroll-progress";
-  bar.setAttribute("aria-hidden", "true");
-  document.body.prepend(bar);
+  const wrap = document.createElement("div");
+  wrap.className = "scroll-progress";
+  wrap.setAttribute("aria-hidden", "true");
+  wrap.innerHTML = '<div class="scroll-progress__fill"></div>';
+  document.body.prepend(wrap);
+  const fill = wrap.querySelector(".scroll-progress__fill");
+
+  const setProgress = (pct) => {
+    fill.style.height = `${pct * 100}%`;
+  };
 
   if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined" && !prefersReducedMotion()) {
     ScrollTrigger.create({
       start: 0,
       end: "max",
       scrub: 0.15,
-      onUpdate: (self) => {
-        bar.style.width = `${self.progress * 100}%`;
-      },
+      onUpdate: (self) => setProgress(self.progress),
     });
     return;
   }
 
   const tick = () => {
     const max = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
-    bar.style.width = `${pct}%`;
+    setProgress(max > 0 ? window.scrollY / max : 0);
   };
   window.addEventListener("scroll", tick, { passive: true });
   tick();

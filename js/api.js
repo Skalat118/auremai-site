@@ -20,6 +20,8 @@ const api = {
   news: () => apiGet("/api/news"),
   performance: () => apiGet("/api/performance"),
   history: () => apiGet("/api/performance/history"),
+  monthly: () => apiGet("/api/performance/monthly"),
+  daily: () => apiGet("/api/performance/daily"),
 };
 
 /**

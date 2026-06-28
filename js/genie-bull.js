@@ -2,10 +2,17 @@
  * AuremAI — bull as section background (watermark), one canvas reparented per section.
  */
 
+const BULL_VIVID = {
+  saturate: 1.35,
+  contrast: 1.08,
+  brightness: 1.06,
+  bgOpacity: 1,
+};
+
 const BULL_POSES = [
   {
     id: "hero",
-    src: "assets/bull-pose-1.png",
+    src: "assets/bull-pose-1.png?v=3",
     anchor: "hero-span",
     spanTop: ".hero__headline",
     spanBottom: ".hero__cta",
@@ -13,41 +20,37 @@ const BULL_POSES = [
     anchorLeftTo: ".hero__copy",
     gapFromCopy: 56,
     insetRight: 12,
-    bgOpacity: 1,
   },
   {
     id: "signal",
-    src: "assets/bull-pose-2.png",
+    src: "assets/bull-pose-2.png?v=3",
     anchor: "slot",
     slotSelector: ".signal__bull-slot",
     maxPx: 720,
     fillSlot: true,
-    bgOpacity: 0.72,
-    saturate: 1.58,
-    contrast: 1.12,
-    brightness: 1.12,
+    saturate: 1.05,
+    contrast: 1,
+    brightness: 1,
   },
   {
     id: "track",
-    src: "assets/bull-pose-3.png",
+    src: "assets/bull-pose-3.png?v=3",
     anchor: "slot",
     slotSelector: ".track__bull-slot",
     maxPx: 440,
     fillSlot: true,
     slotVAlign: "top",
     slotHAlign: "left",
-    bgOpacity: 0.72,
   },
   {
     id: "news",
-    src: "assets/bull-pose-4.png",
+    src: "assets/bull-pose-4.png?v=3",
     anchor: "slot",
     slotSelector: ".news__bull-slot",
     maxPx: 420,
     fillSlot: true,
     slotVAlign: "top",
     slotHAlign: "right",
-    bgOpacity: 0.72,
   },
 ];
 
@@ -396,7 +399,7 @@ class SectionBull {
 
   draw(rect) {
     const pose = this.pose;
-    const fade = pose.bgOpacity ?? 0.45;
+    const fade = pose.bgOpacity ?? BULL_VIVID.bgOpacity;
     const cropTop = rect.cropTop ?? pose.cropTop ?? 1;
     const img = this.cache.get(pose.src) || this.imgEl;
     let source = img;
@@ -410,9 +413,7 @@ class SectionBull {
 
     this.ctx.save();
     this.ctx.globalAlpha = fade;
-    if (pose.saturate || pose.contrast || pose.brightness) {
-      this.ctx.filter = `saturate(${pose.saturate ?? 1}) contrast(${pose.contrast ?? 1}) brightness(${pose.brightness ?? 1})`;
-    }
+    this.ctx.filter = `saturate(${pose.saturate ?? BULL_VIVID.saturate}) contrast(${pose.contrast ?? BULL_VIVID.contrast}) brightness(${pose.brightness ?? BULL_VIVID.brightness})`;
     this.ctx.drawImage(source, 0, 0, srcW, srcH, rect.x, rect.y, rect.width, rect.height);
     this.ctx.filter = "none";
     this.ctx.globalAlpha = 1;
