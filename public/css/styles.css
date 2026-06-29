@@ -1495,3 +1495,85 @@ img { max-width: 100%; display: block; }
   .gauge__bars { grid-template-columns: 1fr; }
   .nav__ticker { display: none; }
 }
+
+/* --- Mobile phone layout (≤767px) --- */
+@media (max-width: 767px) {
+  /* §1 Signal · §2 System — force centered intro copy (bull-right heads) */
+  .signal__head.section__head--bull,
+  .system__head.section__head--bull {
+    text-align: center;
+  }
+  .signal__head.section__head--bull .signal__head-copy,
+  .system__head.section__head--bull .system__head-copy {
+    width: 100%;
+    max-width: none;
+    justify-self: center;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .signal__head-copy .eyebrow,
+  .signal__head-copy h2,
+  .signal__head-copy .section__lead,
+  .system__head-copy .eyebrow,
+  .system__head-copy h2,
+  .system__head-copy .section__lead {
+    text-align: center;
+  }
+
+  /* §3 Track · §4 News — tighten top spacing (bull head reserve) */
+  .track.section,
+  .news.section {
+    padding-top: 40px;
+  }
+  .track__head.section__head--bull,
+  .news__head.section__head--bull {
+    gap: 16px;
+    min-height: 0;
+    margin-bottom: 24px;
+  }
+  .track__head.section__head--bull .track__head-copy {
+    order: -1;
+  }
+  .track__bull-slot,
+  .news__bull-slot {
+    width: min(40vw, 200px);
+    height: min(40vw, 200px);
+  }
+
+  /* §5 How — center head + steps */
+  .how__head.section__head--bull {
+    gap: 16px;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .how__head.section__head--bull .how__head-copy {
+    order: -1;
+    width: 100%;
+    max-width: none;
+    justify-self: center;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .how__head-copy .eyebrow,
+  .how__head-copy h2,
+  .how__head-copy .section__lead {
+    text-align: center;
+  }
+  .how .steps {
+    text-align: center;
+  }
+  .how .step {
+    padding-inline: 0;
+    text-align: center;
+  }
+  .how .step__n {
+    display: inline-block;
+  }
+  .how .partner-inline {
+    align-items: center;
+    margin-inline: auto;
+  }
+  .how .step__note {
+    text-align: center;
+  }
+}
