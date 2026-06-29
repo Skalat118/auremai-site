@@ -841,6 +841,7 @@ img { max-width: 100%; display: block; }
   padding: 14px 16px;
   text-align: left;
   border-bottom: 1px solid var(--line);
+  vertical-align: middle;
 }
 .monthly-table th {
   font-family: var(--font-mono);
@@ -857,16 +858,21 @@ img { max-width: 100%; display: block; }
 .monthly-pnl.is-down { color: var(--bear); }
 .monthly-pnl.is-pending { color: var(--ink-muted); font-style: normal; }
 .monthly-tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--font-mono);
   font-size: 0.66rem;
   font-weight: 600;
+  line-height: 1;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 4px 8px;
+  padding: 6px 10px;
   border-radius: 999px;
   border: 1px solid var(--line);
   color: var(--ink-soft);
+  white-space: nowrap;
+  vertical-align: middle;
 }
 .monthly-tag--progress { border-color: rgba(212, 168, 67, 0.35); color: var(--gold-400); }
 .monthly-tag--closed { border-color: rgba(34, 197, 94, 0.25); color: var(--bull); }
@@ -1644,5 +1650,23 @@ img { max-width: 100%; display: block; }
   /* Hero — less vertical padding on small screens */
   .hero__inner {
     padding: 56px 20px 48px;
+  }
+
+  /* Monthly P&L table — tighter cells, aligned status badge */
+  .monthly-table th,
+  .monthly-table td {
+    padding: 12px 10px;
+  }
+  .monthly-table td:last-child,
+  .monthly-table th:last-child {
+    padding-right: 4px;
+  }
+  .monthly-table td:nth-child(2) {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .monthly-tag {
+    min-height: 26px;
+    padding: 0 10px;
   }
 }
