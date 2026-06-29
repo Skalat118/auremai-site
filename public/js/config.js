@@ -15,10 +15,6 @@ const TELEGRAM_HANDLE = "@auremAIsupport";
 // TODO: replace with your VT Markets IB / affiliate registration link when ready.
 const VT_MARKETS_PARTNER_URL = "https://www.vtmarkets.com/";
 
-// Optional session open (USD) until /api/price returns day_open or previous_close.
-// Set to null when the backend daily reference is fixed.
-const XAU_DAY_OPEN = null;
-
 // Polling cadences (ms). Price/bias are fast; the rest are slower.
 const POLL = {
   price: 20000,

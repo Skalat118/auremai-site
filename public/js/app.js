@@ -217,57 +217,6 @@ function fmtSignedPct(pct, dp = 2) {
   return ` (${sign}${Math.abs(pct).toFixed(dp)}%)`;
 }
 
-const XAU_DAY_REF_KEY = "auremai_xau_day_ref";
-
-function utcDateKey(d = new Date()) {
-  return d.toISOString().slice(0, 10);
-}
-
-/** Browser fallback when API has no day_open (local dev / cold worker cache). */
-function clientDayOpen(price) {
-  const today = utcDateKey();
-  try {
-    const stored = JSON.parse(localStorage.getItem(XAU_DAY_REF_KEY) || "null");
-    if (!stored || stored.date !== today) {
-      const dayOpen =
-        stored?.lastPrice && stored.date !== today ? stored.lastPrice : price;
-      localStorage.setItem(
-        XAU_DAY_REF_KEY,
-        JSON.stringify({ date: today, dayOpen, lastPrice: price })
-      );
-      return dayOpen;
-    }
-    stored.lastPrice = price;
-    localStorage.setItem(XAU_DAY_REF_KEY, JSON.stringify(stored));
-    return stored.dayOpen;
-  } catch {
-    return price;
-  }
-}
-
-function resolveDailyReference(price, data) {
-  if (typeof XAU_DAY_OPEN === "number" && XAU_DAY_OPEN > 0) return XAU_DAY_OPEN;
-  if (typeof data.day_open === "number" && data.day_open > 0) return data.day_open;
-  if (typeof data.previous_close === "number" && data.previous_close > 0) {
-    return data.previous_close;
-  }
-  return clientDayOpen(price);
-}
-
-function resolveDailyPriceChange(data) {
-  const price = data.price;
-  const ref = resolveDailyReference(price, data);
-  if (typeof ref === "number" && ref > 0) {
-    const change = price - ref;
-    const pct = ref > 0 ? (change / ref) * 100 : 0;
-    return { change, pct };
-  }
-  const change = typeof data.change === "number" ? data.change : 0;
-  const prev = price - change;
-  const pct = prev > 0 ? (change / prev) * 100 : data.change_pct ?? 0;
-  return { change, pct: typeof pct === "number" ? pct : 0 };
-}
-
 function hasSinceInceptionPnl(data) {
   return (
     data?.available &&
@@ -654,8 +603,9 @@ async function refreshPrice() {
   priceEls.forEach((el) => (el.textContent = `$${fmtUSD(data.price)}`));
 
   if (changeEl) {
-    const { change, pct } = resolveDailyPriceChange(data);
-    const pctTxt = Number.isFinite(pct) ? fmtSignedPct(pct) : "";
+    const change = typeof data.change === "number" ? data.change : 0;
+    const pct = data.change_pct;
+    const pctTxt = typeof pct === "number" ? fmtSignedPct(pct) : "";
     changeEl.textContent = `${fmtSignedUSD(change)}${pctTxt} today`;
     changeEl.className = "ticker__change " + (change > 0 ? "is-up" : change < 0 ? "is-down" : "");
   }
