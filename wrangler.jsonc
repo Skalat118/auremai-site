@@ -3,6 +3,8 @@
   "name": "auremai-site",
   "main": "src/worker.js",
   "compatibility_date": "2026-06-28",
+  // Required for Git deploy: at least one target (workers.dev). Custom domains via Dashboard only.
+  "workers_dev": true,
   "observability": {
     "enabled": true
   },
