@@ -1424,6 +1424,16 @@ img { max-width: 100%; display: block; }
 }
 
 @media (max-width: 940px) {
+  .section__head {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  .section__head h2,
+  .section__head .eyebrow,
+  .section__head .section__lead {
+    text-align: center;
+  }
   .section__head--bull,
   .section__head--bull-right {
     grid-template-columns: 1fr;
@@ -1440,6 +1450,10 @@ img { max-width: 100%; display: block; }
   .section__head--bull-right .news__head-copy {
     grid-column: 1;
     grid-row: auto;
+    justify-self: center;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center;
   }
   .signal__bull-slot,
   .system__bull-slot,
@@ -1460,6 +1474,7 @@ img { max-width: 100%; display: block; }
     justify-self: center;
     max-width: none;
     margin-left: 0;
+    margin-right: 0;
     text-align: center;
   }
   .news__feed { padding-right: 18px; }
