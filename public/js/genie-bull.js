@@ -28,6 +28,8 @@ const BULL_POSES = [
     slotSelector: ".signal__bull-slot",
     maxPx: 720,
     fillSlot: true,
+    slotScale: 0.84,
+    slotVAlign: "center",
     saturate: 1.05,
     contrast: 1,
     brightness: 1,
@@ -37,8 +39,10 @@ const BULL_POSES = [
     src: "assets/bull-pose-system.png?v=1",
     anchor: "slot",
     slotSelector: ".system__bull-slot",
-    maxPx: 720,
+    maxPx: 520,
     fillSlot: true,
+    slotScale: 0.84,
+    slotVAlign: "center",
     saturate: 1.05,
     contrast: 1,
     brightness: 1,
@@ -48,9 +52,10 @@ const BULL_POSES = [
     src: "assets/bull-pose-3.png?v=3",
     anchor: "slot",
     slotSelector: ".track__bull-slot",
-    maxPx: 440,
+    maxPx: 360,
     fillSlot: true,
-    slotVAlign: "top",
+    slotScale: 0.84,
+    slotVAlign: "center",
     slotHAlign: "left",
   },
   {
@@ -58,9 +63,10 @@ const BULL_POSES = [
     src: "assets/bull-pose-4.png?v=3",
     anchor: "slot",
     slotSelector: ".news__bull-slot",
-    maxPx: 420,
+    maxPx: 360,
     fillSlot: true,
-    slotVAlign: "top",
+    slotScale: 0.84,
+    slotVAlign: "center",
     slotHAlign: "right",
   },
   {
@@ -68,9 +74,24 @@ const BULL_POSES = [
     src: "assets/bull-pose-how.png?v=1",
     anchor: "slot",
     slotSelector: ".how__bull-slot",
-    maxPx: 720,
+    maxPx: 540,
     fillSlot: true,
-    slotVAlign: "top",
+    slotScale: 0.86,
+    slotVAlign: "center",
+    slotHAlign: "left",
+    saturate: 1.05,
+    contrast: 1,
+    brightness: 1,
+  },
+  {
+    id: "pricing",
+    src: "assets/bull-pose-pricing.png?v=1",
+    anchor: "slot",
+    slotSelector: ".pricing__bull-slot",
+    maxPx: 540,
+    fillSlot: true,
+    slotScale: 0.86,
+    slotVAlign: "center",
     slotHAlign: "left",
     saturate: 1.05,
     contrast: 1,
@@ -78,8 +99,8 @@ const BULL_POSES = [
   },
 ];
 
-const BULL_SECTIONS = ["hero", "signal", "system", "track", "news", "how"];
-const HIDE_SECTIONS = ["pricing", "faq"];
+const BULL_SECTIONS = ["hero", "signal", "system", "track", "news", "how", "pricing"];
+const HIDE_SECTIONS = ["faq"];
 
 function cmToPx(cm) {
   return (cm * 96) / 2.54;
@@ -373,18 +394,19 @@ class SectionBull {
     if (pose.anchor === "slot" && pose.slotSelector) {
       const box = this.elementBoxInMount(pose.slotSelector);
       if (box) {
+        const scale = pose.slotScale ?? 1;
         if (pose.fillSlot) {
-          height = box.height * 0.98;
+          height = box.height * 0.98 * scale;
           width = height * ratio;
-          if (width > box.width * 0.98) {
-            width = box.width * 0.98;
+          if (width > box.width * 0.98 * scale) {
+            width = box.width * 0.98 * scale;
             height = width / ratio;
           }
         } else {
-          height = Math.min(box.height * 0.95, pose.maxPx ?? 280);
+          height = Math.min(box.height * 0.95 * scale, pose.maxPx ?? 280);
           width = height * ratio;
-          if (width > box.width * 0.98) {
-            width = box.width * 0.98;
+          if (width > box.width * 0.98 * scale) {
+            width = box.width * 0.98 * scale;
             height = width / ratio;
           }
         }

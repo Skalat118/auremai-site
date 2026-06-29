@@ -280,13 +280,12 @@ html:not(.no-gsap) [data-reveal] {
 
 .step:hover { border-top-color: rgba(212, 168, 67, 0.45); }
 
-.faq__item {
-  transition: border-color 0.3s ease, background 0.3s ease;
+.faq__panel.is-active {
+  cursor: default;
 }
 
-.faq__item:hover {
-  border-color: rgba(212, 168, 67, 0.28);
-  background: var(--card-hover);
+.faq__panel:not(.is-active) {
+  cursor: pointer;
 }
 
 /* --- Macro action confirm --- */

@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css" />
-  <link rel="stylesheet" href="css/motion.css" />
+  <link rel="stylesheet" href="css/styles.css?v=20260714" />
+  <link rel="stylesheet" href="css/motion.css?v=20260714" />
 </head>
 <body>
   <canvas id="scene-canvas" class="scene-canvas" aria-hidden="true"></canvas>
@@ -92,16 +92,18 @@
     <section class="section signal" id="signal" data-scene="signal" data-bull-anchor>
       <div class="section__bull" id="signal-bull-mount" aria-hidden="true"></div>
       <div class="container">
-        <div class="section__head signal__head" data-reveal-group>
+        <div class="section__head signal__head section__head--bull section__head--bull-right" data-reveal-group>
+          <div class="signal__head-copy">
+            <span class="eyebrow" data-reveal>The Signal</span>
+            <h2 data-reveal>One number that reads the whole room.</h2>
+            <p class="section__lead" data-reveal>
+              A monitoring process scans for high-relevance, gold-moving news every few
+              hours — Fed and FOMC policy, CPI/PCE/NFP and other US macro data, major
+              geopolitical shifts, and sudden unexplained moves in gold. A strict filter
+              throws out speculation and stale news.
+            </p>
+          </div>
           <div class="signal__bull-slot" aria-hidden="true"></div>
-          <span class="eyebrow" data-reveal>The Signal</span>
-          <h2 data-reveal>One number that reads the whole room.</h2>
-          <p class="section__lead" data-reveal>
-            A monitoring process scans for high-relevance, gold-moving news every few
-            hours — Fed and FOMC policy, CPI/PCE/NFP and other US macro data, major
-            geopolitical shifts, and sudden unexplained moves in gold. A strict filter
-            throws out speculation and stale news.
-          </p>
         </div>
 
         <div class="signal__grid" data-reveal-group>
@@ -184,16 +186,18 @@
     <section class="section system" id="system" data-scene="system" data-bull-anchor>
       <div class="section__bull" id="system-bull-mount" aria-hidden="true"></div>
       <div class="container">
-        <div class="section__head system__head" data-reveal-group>
+        <div class="section__head system__head section__head--bull section__head--bull-right" data-reveal-group>
+          <div class="system__head-copy">
+            <span class="eyebrow" data-reveal>The System</span>
+            <h2 data-reveal>Breakout logic. Confirmed entries. Controlled risk.</h2>
+            <p class="section__lead" data-reveal>
+              AuremAI analyses the market in depth, places pending orders at key
+              liquidity levels, and enters only when price confirms the move. Open
+              positions are managed with a dynamic trailing stop — protecting profit
+              while letting winners run.
+            </p>
+          </div>
           <div class="system__bull-slot" aria-hidden="true"></div>
-          <span class="eyebrow" data-reveal>The System</span>
-          <h2 data-reveal>Breakout logic. Confirmed entries. Controlled risk.</h2>
-          <p class="section__lead" data-reveal>
-            AuremAI analyses the market in depth, places pending orders at key
-            liquidity levels, and enters only when price confirms the move. Open
-            positions are managed with a dynamic trailing stop — protecting profit
-            while letting winners run.
-          </p>
         </div>
 
         <ul class="trust-strip" data-reveal-group aria-label="Trading safeguards">
@@ -285,10 +289,10 @@
     </div>
 
     <!-- ============================ TRACK RECORD ============================ -->
-    <section class="section track" id="track" data-scene="track">
+    <section class="section track" id="track" data-scene="track" data-bull-anchor>
       <div class="section__bull" id="track-bull-mount" aria-hidden="true"></div>
       <div class="container">
-        <div class="section__head track__head" data-reveal-group>
+        <div class="section__head track__head section__head--bull" data-reveal-group>
           <div class="track__bull-slot" id="track-bull-anchor" aria-hidden="true"></div>
           <div class="track__head-copy">
             <span class="eyebrow" data-reveal>Track Record</span>
@@ -401,17 +405,19 @@
     </div>
 
     <!-- ============================ NEWS ============================ -->
-    <section class="section news" id="news" data-scene="news">
+    <section class="section news" id="news" data-scene="news" data-bull-anchor>
       <div class="section__bull" id="news-bull-mount" aria-hidden="true"></div>
       <div class="container">
-        <div class="section__head news__head" data-reveal-group>
+        <div class="section__head news__head section__head--bull section__head--bull-right" data-reveal-group>
+          <div class="news__head-copy">
+            <span class="eyebrow" data-reveal>What's moving gold</span>
+            <h2 data-reveal>See exactly what's feeding the signal.</h2>
+            <p class="section__lead" data-reveal>
+              This is the transparency layer. Every item below is something the system
+              actually weighed — with its category, directional bias, and time.
+            </p>
+          </div>
           <div class="news__bull-slot" id="news-bull-anchor" aria-hidden="true"></div>
-          <span class="eyebrow" data-reveal>What's moving gold</span>
-          <h2 data-reveal>See exactly what's feeding the signal.</h2>
-          <p class="section__lead" data-reveal>
-            This is the transparency layer. Every item below is something the system
-            actually weighed — with its category, directional bias, and time.
-          </p>
         </div>
         <div class="news__feed" data-reveal>
           <div class="news__scroller" data-news tabindex="0" aria-label="Latest news items">
@@ -442,14 +448,16 @@
     <section class="section how" id="how" data-scene="how" data-bull-anchor>
       <div class="section__bull" id="how-bull-mount" aria-hidden="true"></div>
       <div class="container">
-        <div class="section__head how__head" data-reveal-group>
+        <div class="section__head how__head section__head--bull" data-reveal-group>
           <div class="how__bull-slot" aria-hidden="true"></div>
-          <span class="eyebrow" data-reveal>How it works</span>
-          <h2 data-reveal>Up and running in four steps.</h2>
-          <p class="section__lead" data-reveal>
-            Follow the full onboarding path — including our official broker partner — so
-            your account matches the live performance you see on this page.
-          </p>
+          <div class="how__head-copy">
+            <span class="eyebrow" data-reveal>How it works</span>
+            <h2 data-reveal>Up and running in four steps.</h2>
+            <p class="section__lead" data-reveal>
+              Follow the full onboarding path — including our official broker partner — so
+              your account matches the live performance you see on this page.
+            </p>
+          </div>
         </div>
         <ol class="steps" data-reveal-group>
           <li class="step" data-reveal>
@@ -502,9 +510,11 @@
 
     <!-- ============================ PRICING ============================ -->
     <section class="section pricing" id="pricing" data-scene="pricing" data-bull-anchor>
+      <div class="section__bull" id="pricing-bull-mount" aria-hidden="true"></div>
       <div class="container">
-        <div class="section__head" data-reveal-group>
-          <div>
+        <div class="section__head pricing__head section__head--bull" data-reveal-group>
+          <div class="pricing__bull-slot" aria-hidden="true"></div>
+          <div class="pricing__head-copy">
             <span class="eyebrow" data-reveal>Pricing</span>
             <h2 data-reveal>Pick your term. Cancel the rest of the noise.</h2>
             <p class="section__lead" data-reveal>
@@ -558,9 +568,7 @@
         </div>
         <p class="pricing__foot">
           Payment links open a conversation with <a href="#" data-telegram>@auremAIsupport</a> for now. Card checkout is coming soon.
-          After access is confirmed, open your account with
-          <a href="#" data-vt-markets target="_blank" rel="noopener noreferrer">VT Markets</a>
-          (official partner) before installing — required for performance parity with our live track record.
+          After access is confirmed, we send you the VT Markets partner link on Telegram before installing — required for performance parity with our live track record.
         </p>
       </div>
     </section>
@@ -576,47 +584,203 @@
 
     <!-- ============================ FAQ ============================ -->
     <section class="section faq" id="faq" data-scene="faq">
-      <div class="container container--narrow">
-        <div class="section__head">
+      <div class="container faq__container">
+        <div class="section__head faq__head" data-reveal-group>
           <span class="eyebrow">FAQ</span>
           <h2>Questions, answered straight.</h2>
-        </div>
-        <div class="faq__list" data-reveal-group>
-          <details class="faq__item" data-reveal>
-            <summary>What is AuremAI?</summary>
-            <p>AuremAI is AI-enhanced trading software for gold (XAUUSD) — a breakout and liquidity zone strategy that reads a live macro signal to size every position. What you're buying is access to run the system on your MT5 terminal, delivered and supported over Telegram.</p>
-          </details>
-          <details class="faq__item" data-reveal>
-            <summary>Does it use martingale or a grid?</summary>
-            <p>No. AuremAI does not use martingale or grid logic. Every trade is opened with predefined take profit and stop loss, and risk is managed through fixed lot size or percentage-based sizing — your choice.</p>
-          </details>
-          <details class="faq__item" data-reveal>
-            <summary>How is the signal calculated?</summary>
-            <p>A monitoring process scans for high-relevance gold news every few hours and tags each item with a category (Fed policy carries the most weight, down through key macro, major geopolitics, secondary macro, and general) and a bullish, bearish, or neutral bias. A live endpoint blends recent items using time-decay weighting — influence halves roughly every six hours — into a single bias label, a directional score, and a strength reading.</p>
-          </details>
-          <details class="faq__item" data-reveal>
-            <summary>Can I see results before I buy?</summary>
-            <p>Yes. The <a href="#track">Track Record</a> section above shows a live trading account — equity, balance, and history — that updates on its own. No purchase or sign-up required to watch it.</p>
-          </details>
-          <details class="faq__item" data-reveal>
-            <summary>What risk is involved?</summary>
-            <p>Trading carries real risk, including the loss of capital. AuremAI sizes positions to manage risk — using low, medium, and high risk tiers depending on signal strength — but managing risk is not the same as removing it. No system can guarantee a profit, and you should never trade money you can't afford to lose.</p>
-          </details>
-          <details class="faq__item" data-reveal>
-            <summary>How do I receive the system after paying?</summary>
-            <p>Everything happens over Telegram. After your access is confirmed, we walk you through opening your <a href="#" data-vt-markets target="_blank" rel="noopener noreferrer">VT Markets</a> account (our official partner broker), then installing and configuring the system on your MT5 terminal.</p>
-          </details>
-          <details class="faq__item" data-reveal>
-            <summary>Do I have to use VT Markets?</summary>
-            <p>The system can run on any MT5 broker, but our live track record is verified on VT Markets. To get the closest match to the performance shown on this page, we strongly recommend registering with VT Markets through our official partner link — same execution environment as our monitored account.</p>
-          </details>
-          <details class="faq__item" data-reveal>
-            <summary>What's your refund policy?</summary>
-            <p>Refunds are handled case by case. Reach out to <a href="#" data-telegram>@auremAIsupport</a> and we'll talk it through with you directly.</p>
-          </details>
+          <p class="section__lead">Everything you need to evaluate AuremAI before you connect an account — setup, risk, delivery, and how the macro signal drives position sizing.</p>
         </div>
 
-        <div class="section__cta section__cta--center" data-reveal>
+        <div class="faq__deck" data-faq-deck>
+          <div class="faq__deck-viewport" data-faq-viewport tabindex="0" aria-roledescription="carousel" aria-label="FAQ">
+            <div class="faq__deck-stage" data-faq-stage>
+            <article class="faq__panel" data-faq-panel>
+              <span class="faq__idx">01</span>
+              <h3 class="faq__q">What is AuremAI?</h3>
+              <div class="faq__rule" aria-hidden="true"></div>
+              <div class="faq__body">
+                <div class="faq__body-inner">
+                  <p>AuremAI is AI-enhanced trading software for gold (XAUUSD) — a breakout and liquidity zone strategy that reads a live macro signal to size every position. What you're buying is access to run the system on your MT5 terminal, delivered and supported over Telegram.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq__panel" data-faq-panel>
+              <span class="faq__idx">02</span>
+              <h3 class="faq__q">Does it use martingale or a grid?</h3>
+              <div class="faq__rule" aria-hidden="true"></div>
+              <div class="faq__body">
+                <div class="faq__body-inner">
+                  <p>No. AuremAI does not use martingale or grid logic. Every trade is opened with predefined take profit and stop loss, and risk is managed through fixed lot size or percentage-based sizing — your choice.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq__panel" data-faq-panel>
+              <span class="faq__idx">03</span>
+              <h3 class="faq__q">How is the signal calculated?</h3>
+              <div class="faq__rule" aria-hidden="true"></div>
+              <div class="faq__body">
+                <div class="faq__body-inner">
+                  <p>A monitoring process scans for high-relevance gold news every few hours and tags each item with a category (Fed policy carries the most weight, down through key macro, major geopolitics, secondary macro, and general) and a bullish, bearish, or neutral bias. A live endpoint blends recent items using time-decay weighting — influence halves roughly every six hours — into a single bias label, a directional score, and a strength reading.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq__panel" data-faq-panel>
+              <span class="faq__idx">04</span>
+              <h3 class="faq__q">What instrument does it trade?</h3>
+              <div class="faq__rule" aria-hidden="true"></div>
+              <div class="faq__body">
+                <div class="faq__body-inner">
+                  <p>Gold only — XAUUSD on MetaTrader 5. The strategy, macro news filter, and execution logic are built and tuned for that single market rather than spread across unrelated pairs.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq__panel" data-faq-panel>
+              <span class="faq__idx">05</span>
+              <h3 class="faq__q">Can I see results before I buy?</h3>
+              <div class="faq__rule" aria-hidden="true"></div>
+              <div class="faq__body">
+                <div class="faq__body-inner">
+                  <p>Yes. The <a href="#track">Track Record</a> section above shows a live trading account — equity, balance, and history — that updates on its own. No purchase or sign-up required to watch it.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq__panel" data-faq-panel>
+              <span class="faq__idx">06</span>
+              <h3 class="faq__q">What risk is involved?</h3>
+              <div class="faq__rule" aria-hidden="true"></div>
+              <div class="faq__body">
+                <div class="faq__body-inner">
+                  <p>Trading carries real risk, including the loss of capital. AuremAI sizes positions to manage risk — using low, medium, and high risk tiers depending on signal strength — but managing risk is not the same as removing it. No system can guarantee a profit, and you should never trade money you can't afford to lose.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq__panel" data-faq-panel>
+              <span class="faq__idx">07</span>
+              <h3 class="faq__q">Is AuremAI financial advice?</h3>
+              <div class="faq__rule" aria-hidden="true"></div>
+              <div class="faq__body">
+                <div class="faq__body-inner">
+                  <p>No. AuremAI provides software and market signals, not personalised investment advice. You remain responsible for your account, broker relationship, and trading decisions. Consult a licensed adviser if you need regulated guidance.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq__panel" data-faq-panel>
+              <span class="faq__idx">08</span>
+              <h3 class="faq__q">How do I receive the system after paying?</h3>
+              <div class="faq__rule" aria-hidden="true"></div>
+              <div class="faq__body">
+                <div class="faq__body-inner">
+                  <p>Everything happens over Telegram. After your access is confirmed, we walk you through opening your VT Markets account (our official partner broker), then installing and configuring the system on your MT5 terminal.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq__panel" data-faq-panel>
+              <span class="faq__idx">09</span>
+              <h3 class="faq__q">Do you take a performance fee?</h3>
+              <div class="faq__rule" aria-hidden="true"></div>
+              <div class="faq__body">
+                <div class="faq__body-inner">
+                  <p>No. We never take a cut of your trading profits — everything you earn stays in your account. Our revenue comes from your membership subscription and a small share of trading volume when you register with VT Markets through the partner referral link we send you on Telegram. That referral arrangement does not reduce your profits.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq__panel" data-faq-panel>
+              <span class="faq__idx">10</span>
+              <h3 class="faq__q">Do I have to use VT Markets?</h3>
+              <div class="faq__rule" aria-hidden="true"></div>
+              <div class="faq__body">
+                <div class="faq__body-inner">
+                  <p>The system can run on any MT5 broker, but our live track record is verified on VT Markets. To get the closest match to the performance shown on this page, we strongly recommend registering through the partner link we send you on Telegram — same execution environment as our monitored account.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq__panel" data-faq-panel>
+              <span class="faq__idx">11</span>
+              <h3 class="faq__q">What account size do I need?</h3>
+              <div class="faq__rule" aria-hidden="true"></div>
+              <div class="faq__body">
+                <div class="faq__body-inner">
+                  <p>There is no fixed minimum published here — it depends on your broker's margin rules and how you size risk. We recommend enough balance to absorb normal drawdown without breaching margin. Support can suggest sensible starting ranges once your account type is confirmed on Telegram.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq__panel" data-faq-panel>
+              <span class="faq__idx">12</span>
+              <h3 class="faq__q">How many MT5 accounts per membership?</h3>
+              <div class="faq__rule" aria-hidden="true"></div>
+              <div class="faq__body">
+                <div class="faq__body-inner">
+                  <p>One. Each membership licenses a single live MT5 account. During onboarding you register that specific account with us — the license is bound to it and cannot be used on a second account without contacting support.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq__panel" data-faq-panel>
+              <span class="faq__idx">13</span>
+              <h3 class="faq__q">Do I need my PC on 24/7?</h3>
+              <div class="faq__rule" aria-hidden="true"></div>
+              <div class="faq__body">
+                <div class="faq__body-inner">
+                  <p>MetaTrader 5 must stay running with the system attached for automated execution. Most users run MT5 on a VPS so execution is not interrupted when their laptop sleeps or travels. We can point you to common VPS setups during onboarding.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq__panel" data-faq-panel>
+              <span class="faq__idx">14</span>
+              <h3 class="faq__q">How often does the macro signal update?</h3>
+              <div class="faq__rule" aria-hidden="true"></div>
+              <div class="faq__body">
+                <div class="faq__body-inner">
+                  <p>News is scanned every few hours; each item is weighted with time decay so recent headlines carry more influence. The live endpoint on this site reflects the current blended bias, score, and strength reading — visible in the Signal section without logging in.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq__panel" data-faq-panel>
+              <span class="faq__idx">15</span>
+              <h3 class="faq__q">How long does onboarding take?</h3>
+              <div class="faq__rule" aria-hidden="true"></div>
+              <div class="faq__body">
+                <div class="faq__body-inner">
+                  <p>Most setups complete within one session: live broker account ready, your MT5 account registered to the license, and the system installed. If you already have MT5 installed, it can be under an hour with support on Telegram.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="faq__panel" data-faq-panel>
+              <span class="faq__idx">16</span>
+              <h3 class="faq__q">What's your refund policy?</h3>
+              <div class="faq__rule" aria-hidden="true"></div>
+              <div class="faq__body">
+                <div class="faq__body-inner">
+                  <p>Refunds are handled case by case. Reach out to <a href="#" data-telegram>@auremAIsupport</a> and we'll talk it through with you directly.</p>
+                </div>
+              </div>
+            </article>
+
+            </div>
+          </div>
+          <div class="faq__deck-nav" data-reveal>
+            <button type="button" class="faq__deck-btn" data-faq-prev aria-label="Previous question">←</button>
+            <span class="faq__deck-counter" data-faq-counter aria-live="polite">01 / 16</span>
+            <button type="button" class="faq__deck-btn" data-faq-next aria-label="Next question">→</button>
+          </div>
+          <p class="faq__deck-hint" data-reveal>Scroll or use the arrows to browse all questions</p>
+        </div>
+
+        <div class="section__cta section__cta--center faq__cta" data-reveal>
           <a class="btn btn--gold btn--lg" href="#" data-telegram data-macro-action data-confirm-label="Tap again — Get started">Get started</a>
         </div>
       </div>
@@ -651,7 +815,8 @@
   <script src="js/app.js?v=20260628f"></script>
   <script src="js/motion.js"></script>
   <script src="js/scene-three.js"></script>
-  <script src="js/scroll-cinema.js?v=20260706"></script>
-  <script src="js/genie-bull.js?v=20260708"></script>
+  <script src="js/scroll-cinema.js?v=20260713"></script>
+  <script src="js/faq-deck.js?v=20260713"></script>
+  <script src="js/genie-bull.js?v=20260715"></script>
 </body>
 </html>

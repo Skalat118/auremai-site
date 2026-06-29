@@ -12,7 +12,7 @@
   gsap.registerPlugin(ScrollTrigger);
 
   if (reduced) {
-    gsap.set("[data-reveal], [data-scene-break], .hero__word, .news-item, .faq__item", {
+    gsap.set("[data-reveal], [data-scene-break], .hero__word, .news-item, .faq__panel", {
       clearProps: "all",
       opacity: 1,
       y: 0,
@@ -390,27 +390,23 @@
     });
   }
 
-  /* ===================== FAQ — blur rise ===================== */
+  /* ===================== FAQ — deck intro ===================== */
   function initFaq() {
-    gsap.from("#faq .section__head > *", {
-      y: 24,
+    gsap.from("#faq .faq__head > *", {
+      y: 28,
       opacity: 0,
-      stagger: 0.08,
-      duration: 0.7,
+      stagger: 0.09,
+      duration: 0.75,
       ease: EASE,
       scrollTrigger: { trigger: "#faq", start: "top 78%" },
     });
 
-    gsap.utils.toArray(".faq__item").forEach((item, i) => {
-      gsap.from(item, {
-        y: 32,
-        opacity: 0,
-        filter: "blur(10px)",
-        duration: 0.65,
-        ease: EASE,
-        scrollTrigger: { trigger: item, start: "top 92%" },
-        delay: (i % 3) * 0.06,
-      });
+    gsap.from(".faq__deck", {
+      y: 36,
+      opacity: 0,
+      duration: 0.85,
+      ease: EASE,
+      scrollTrigger: { trigger: ".faq__deck", start: "top 88%" },
     });
   }
 
