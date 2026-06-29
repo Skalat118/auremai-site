@@ -217,6 +217,42 @@ function fmtSignedPct(pct, dp = 2) {
   return ` (${sign}${Math.abs(pct).toFixed(dp)}%)`;
 }
 
+/** Coerce API scalars (number or numeric string) without recomputing. */
+function asApiNumber(value) {
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  if (typeof value === "string" && value.trim() !== "") {
+    const n = Number(value);
+    return Number.isFinite(n) ? n : null;
+  }
+  return null;
+}
+
+/** Ticker daily $ change — formats API `change` as-is (no derivation from price). */
+function fmtApiChangeUsd(amount) {
+  const n = asApiNumber(amount);
+  if (n === null) return "—";
+  const sign = n >= 0 ? "+" : "−";
+  return `${sign}$${fmtUSD(Math.abs(n))}`;
+}
+
+/** Ticker daily % change — formats API `change_pct` as-is with enough precision. */
+function fmtApiChangePct(pct) {
+  const n = asApiNumber(pct);
+  if (n === null) return "";
+  const sign = n >= 0 ? "+" : "−";
+  const abs = Math.abs(n);
+  const dp = abs < 1 ? 3 : 2;
+  return ` (${sign}${abs.toFixed(dp)}%)`;
+}
+
+function clearLegacyPriceStorage() {
+  try {
+    localStorage.removeItem("auremai_xau_day_ref");
+  } catch {
+    /* ignore */
+  }
+}
+
 function hasSinceInceptionPnl(data) {
   return (
     data?.available &&
@@ -656,10 +692,9 @@ async function refreshPrice() {
   priceEls.forEach((el) => (el.textContent = `$${fmtUSD(data.price)}`));
 
   if (changeEl) {
-    const change = typeof data.change === "number" ? data.change : 0;
-    const pct = data.change_pct;
-    const pctTxt = typeof pct === "number" ? fmtSignedPct(pct) : "";
-    changeEl.textContent = `${fmtSignedUSD(change)}${pctTxt} today`;
+    const change = asApiNumber(data.change) ?? 0;
+    const pctTxt = fmtApiChangePct(data.change_pct);
+    changeEl.textContent = `${fmtApiChangeUsd(data.change)}${pctTxt} today`;
     changeEl.className = "ticker__change " + (change > 0 ? "is-up" : change < 0 ? "is-down" : "");
   }
 }
@@ -1219,6 +1254,7 @@ function wireStaticLinks() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  clearLegacyPriceStorage();
   wireBullFallback();
   wireStaticLinks();
   poll(refreshPrice, POLL.price);

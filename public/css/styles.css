@@ -178,18 +178,6 @@ img { max-width: 100%; display: block; }
   margin-left: auto;
 }
 
-/* Signal — taller copy: let bull slot stretch to full head height (desktop) */
-@media (min-width: 768px) {
-  .signal__head.section__head--bull {
-    align-items: stretch;
-  }
-  .signal__head.section__head--bull .signal__bull-slot {
-    height: auto;
-    min-height: var(--bull-slot-h);
-    align-self: stretch;
-  }
-}
-
 .section__cta {
   margin-top: 48px;
   display: flex;
