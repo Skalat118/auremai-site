@@ -115,8 +115,10 @@ function initMacroConfirm() {
         btn.textContent = defaultLabel;
         showToast("Confirmed — opening…");
 
-        if (btn.dataset.checkout !== undefined) {
-          // TODO: replace with Stripe Checkout for plan = btn.dataset.checkout
+        const url = btn.getAttribute("href");
+        if (url?.startsWith("https://buy.stripe.com")) {
+          setTimeout(() => window.open(url, "_blank", "noopener"), 280);
+        } else if (btn.dataset.checkout !== undefined) {
           setTimeout(() => window.open(TELEGRAM_URL, "_blank", "noopener"), 280);
         } else if (btn.hasAttribute("data-telegram")) {
           e.preventDefault();
