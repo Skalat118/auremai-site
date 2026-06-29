@@ -211,6 +211,61 @@ function fmtSignedUSD(amount) {
   return `${sign}$${fmtUSD(Math.abs(amount))}`;
 }
 
+function fmtSignedPct(pct, dp = 2) {
+  if (typeof pct !== "number" || !Number.isFinite(pct)) return "";
+  const sign = pct >= 0 ? "+" : "−";
+  return ` (${sign}${Math.abs(pct).toFixed(dp)}%)`;
+}
+
+/** Prefer API previous_close; otherwise derive from price − change. */
+function resolvePreviousClose(price, change, previousClose) {
+  if (typeof previousClose === "number" && previousClose > 0) return previousClose;
+  if (typeof price === "number" && typeof change === "number") {
+    const prev = price - change;
+    if (prev > 0) return prev;
+  }
+  return null;
+}
+
+/** Normalize API change_pct when it is a decimal fraction (e.g. 0.0008 → 0.08%). */
+function normalizeChangePct(apiPct, computedPct) {
+  if (typeof apiPct !== "number" || !Number.isFinite(apiPct)) return computedPct ?? null;
+  if (apiPct === 0) return 0;
+
+  const scaled = apiPct * 100;
+  if (Math.abs(apiPct) > 0 && Math.abs(apiPct) < 0.01) return scaled;
+
+  if (typeof computedPct === "number" && Number.isFinite(computedPct)) {
+    const diffRaw = Math.abs(Math.abs(apiPct) - Math.abs(computedPct));
+    const diffScaled = Math.abs(Math.abs(scaled) - Math.abs(computedPct));
+    if (diffScaled < diffRaw && Math.abs(apiPct) < 1) return scaled;
+    return computedPct;
+  }
+
+  return apiPct;
+}
+
+function computeDailyChangePct(price, change, previousClose, apiChangePct) {
+  const prevClose = resolvePreviousClose(price, change, previousClose);
+  let computed = null;
+
+  if (prevClose != null && typeof change === "number") {
+    computed = change === 0 ? 0 : (change / prevClose) * 100;
+  }
+
+  let pct =
+    computed != null && Number.isFinite(computed)
+      ? computed
+      : normalizeChangePct(apiChangePct, null);
+
+  if (pct == null || !Number.isFinite(pct)) return null;
+  if (change === 0) return 0;
+  if (typeof change === "number" && change !== 0) {
+    return Math.abs(pct) * (change > 0 ? 1 : -1);
+  }
+  return pct;
+}
+
 function hasSinceInceptionPnl(data) {
   return (
     data?.available &&
@@ -597,12 +652,16 @@ async function refreshPrice() {
   priceEls.forEach((el) => (el.textContent = `$${fmtUSD(data.price)}`));
 
   if (changeEl) {
-    const ch = data.change ?? 0;
-    const pct = data.change_pct;
-    const sign = ch > 0 ? "+" : "";
-    const pctTxt = typeof pct === "number" ? ` (${sign}${pct.toFixed(2)}%)` : "";
-    changeEl.textContent = `${sign}${fmtUSD(ch)}${pctTxt} today`;
-    changeEl.className = "ticker__change " + (ch > 0 ? "is-up" : ch < 0 ? "is-down" : "");
+    const change = typeof data.change === "number" ? data.change : 0;
+    const pct = computeDailyChangePct(
+      data.price,
+      change,
+      data.previous_close,
+      data.change_pct
+    );
+    const pctTxt = pct != null ? fmtSignedPct(pct) : "";
+    changeEl.textContent = `${fmtSignedUSD(change)}${pctTxt} today`;
+    changeEl.className = "ticker__change " + (change > 0 ? "is-up" : change < 0 ? "is-down" : "");
   }
 }
 

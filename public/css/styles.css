@@ -1417,8 +1417,23 @@ img { max-width: 100%; display: block; }
   .how__timeline { display: none; }
   .steps { grid-template-columns: 1fr; }
   .step { padding: 28px 0; }
-  .step:not(:last-child) { padding-right: 0; }
+  .step:not(:last-child),
+  .step:nth-child(odd):not(:last-child) { padding-right: 0; }
   .step:first-child { border-top: none; }
+  /* §5 How — center steps when stacked */
+  .how .steps { text-align: center; }
+  .how .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .how .step h3,
+  .how .step p,
+  .how .step__n { text-align: center; }
+  .how .step__n { display: inline-block; }
+  .how .partner-inline { align-items: center; margin-inline: auto; }
+  .how .step__note { text-align: center; }
   .plans { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
   .plan--featured { transform: none; }
 }
@@ -1601,7 +1616,11 @@ img { max-width: 100%; display: block; }
   }
   .how .step {
     padding: 20px 0;
+    padding-right: 0;
     text-align: center;
+  }
+  .how .step:nth-child(odd):not(:last-child) {
+    padding-right: 0;
   }
   .how .step__n {
     display: inline-block;
