@@ -785,6 +785,28 @@ img { max-width: 100%; display: block; }
   font-family: var(--font-mono);
   letter-spacing: 0.02em;
 }
+.chart-daily-stat {
+  margin: 8px 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+}
+.chart-daily-stat.is-up { color: var(--bull); }
+.chart-daily-stat.is-down { color: var(--bear); }
+.chart-daily-stat__tag {
+  color: var(--gold-400);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.chart__dot--growth { fill: #e8874f; }
+.chart__pnl-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  fill: var(--ink-soft);
+  pointer-events: none;
+}
 .chart-legend { display: flex; gap: 18px; flex-wrap: wrap; padding-top: 4px; }
 .chart-legend__item { font-family: var(--font-mono); font-size: 0.78rem; display: flex; align-items: center; gap: 6px; color: var(--ink-soft); }
 .chart-legend__item::before { content: ""; width: 14px; height: 3px; border-radius: 2px; }

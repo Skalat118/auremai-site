@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=20260629f" />
+  <link rel="stylesheet" href="css/styles.css?v=20260630b" />
   <link rel="stylesheet" href="css/motion.css?v=20260714" />
 </head>
 <body>
@@ -339,11 +339,12 @@
           <div class="chart-card__head">
             <div class="chart-card__titles">
               <h3>Growth</h3>
-              <p class="chart-card__sub">Balance growth % from start · month-end before daily tracking · live daily once recorded</p>
+              <p class="chart-card__sub" data-chart-sub>Growth % from starting balance · live daily balance</p>
+              <p class="chart-daily-stat" data-chart-daily-stat hidden aria-live="polite"></p>
             </div>
             <div class="chart-legend">
               <span class="chart-legend__item chart-legend__item--growth">Daily balance</span>
-              <span class="chart-legend__item chart-legend__item--monthly" data-chart-legend-monthly hidden>Month-end (no daily data)</span>
+              <span class="chart-legend__item chart-legend__item--monthly" data-chart-legend-monthly hidden>Month-end (pre-daily)</span>
             </div>
           </div>
           <div class="chart" data-chart>
@@ -356,7 +357,7 @@
           <div class="chart-card__head">
             <div class="chart-card__titles">
               <h3>Drawdown</h3>
-              <p class="chart-card__sub">Daily floating drawdown once recorded · historical range before that</p>
+              <p class="chart-card__sub">Live daily floating drawdown from recorded balance</p>
             </div>
             <div class="chart-legend">
               <span class="chart-legend__item chart-legend__item--dd">Daily drawdown</span>
@@ -810,7 +811,7 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.min.js"></script>
   <script src="js/config.js?v=20260630a"></script>
   <script src="js/api.js?v=20260702"></script>
-  <script src="js/app.js?v=20260630a"></script>
+  <script src="js/app.js?v=20260630b"></script>
   <script src="js/motion.js"></script>
   <script src="js/scene-three.js"></script>
   <script src="js/scroll-cinema.js?v=20260713"></script>

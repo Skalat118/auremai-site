@@ -331,6 +331,7 @@ function parseDailyChartPoints(dailyData, initialBalance) {
         b,
         ddPct,
         pnlAmount: row.pnl_amount,
+        pnlPercent: row.pnl_percent,
         inProgress: !!row.in_progress,
         date: dateKey,
         month: dateKey.slice(0, 7) || null,
@@ -425,6 +426,58 @@ function buildCombinedChartLabels(monthlyPoints, dailyPoints) {
   }
 
   return labels.sort((a, b) => a.t - b.t);
+}
+
+function updateChartDailyStat(dailyData) {
+  const el = $("[data-chart-daily-stat]");
+  if (!el) return;
+
+  const rows = dailyRowsFromResponse(dailyData);
+  if (!rows.length) {
+    el.hidden = true;
+    return;
+  }
+
+  const day = rows[rows.length - 1];
+  const hasPnl = typeof day.pnl_amount === "number";
+  if (!hasPnl && !day.in_progress) {
+    el.hidden = true;
+    return;
+  }
+
+  const label = day.in_progress
+    ? "Today"
+    : formatChartDate(dateToChartTimestamp(day.date ?? day.day));
+
+  let html = `<span class="chart-daily-stat__label">Daily P&amp;L · ${label}</span>`;
+  if (hasPnl) {
+    html += ` · ${fmtSignedUSD(day.pnl_amount)}`;
+    if (typeof day.pnl_percent === "number") {
+      html += fmtSignedPct(day.pnl_percent);
+    }
+  }
+  if (day.in_progress) {
+    html += ` · <span class="chart-daily-stat__tag">In progress</span>`;
+  }
+
+  el.innerHTML = html;
+  el.className =
+    "chart-daily-stat " +
+    (hasPnl ? (day.pnl_amount >= 0 ? "is-up" : "is-down") : "");
+  el.hidden = false;
+}
+
+function updateGrowthChartSub(hasDaily, hasMonthlyLine) {
+  const sub = $("[data-chart-sub]");
+  if (!sub) return;
+  if (hasDaily && hasMonthlyLine) {
+    sub.textContent =
+      "Growth % from starting balance · live daily balance · dashed = month-end before daily tracking";
+  } else if (hasDaily) {
+    sub.textContent = "Growth % from starting balance · live daily balance";
+  } else {
+    sub.textContent = "Growth % from starting balance · month-end markers until daily tracking begins";
+  }
 }
 
 function monthEndTimestamp(ym) {
@@ -721,6 +774,8 @@ function renderGrowthChart(svg, empty, { monthlyPoints = [], dailyPoints = [], i
   const hasMonthlyLine = monthlyPoints.length >= 2;
   const hasDaily = dailyPoints.length > 0;
 
+  updateGrowthChartSub(hasDaily, hasMonthlyLine);
+
   if (monthLegend) {
     monthLegend.hidden = !hasMonthlyLine;
     monthLegend.style.display = hasMonthlyLine ? "" : "none";
@@ -808,6 +863,22 @@ function renderGrowthChart(svg, empty, { monthlyPoints = [], dailyPoints = [], i
     linePaths += `<path class="chart__line chart__line--growth" d="${dailyPath}" stroke="#e8874f" stroke-width="2.25" fill="none" />`;
   }
 
+  const dailyDots = hasDaily
+    ? dailyPoints
+        .map((p) => {
+          const xi = x(p.t).toFixed(1);
+          const yi = yBal(p).toFixed(1);
+          let labels = "";
+          if (typeof p.pnlAmount === "number") {
+            const sign = p.pnlAmount >= 0 ? "+" : "−";
+            const pnlTxt = `${sign}$${fmtUSD(Math.abs(p.pnlAmount))}`;
+            labels += `<text class="chart__pnl-label" x="${xi}" y="${(yBal(p) - 10).toFixed(1)}" text-anchor="middle">${pnlTxt}</text>`;
+          }
+          return `${labels}<circle class="chart__dot chart__dot--growth" cx="${xi}" cy="${yi}" r="4.5" />`;
+        })
+        .join("")
+    : "";
+
   if (empty) empty.hidden = true;
   svg.innerHTML = `
     <rect class="chart__plot-bg" x="${padL}" y="${padT}" width="${plotW}" height="${plotH}" rx="4" />
@@ -819,6 +890,7 @@ function renderGrowthChart(svg, empty, { monthlyPoints = [], dailyPoints = [], i
     ${yAxis}
     ${xAxis}
     ${linePaths}
+    ${dailyDots}
   `;
 
   svg.querySelectorAll(".chart__line").forEach((path) => {
@@ -961,6 +1033,7 @@ async function refreshHistory() {
     initial: perf.initial_balance,
   });
   renderDrawdownChart(ddSvg, ddEmpty, dailyPoints);
+  updateChartDailyStat(dailyData);
 }
 
 /* ------------------------------- monthly P&L ------------------------------- */
