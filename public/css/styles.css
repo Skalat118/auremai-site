@@ -1347,7 +1347,7 @@ img { max-width: 100%; display: block; }
 .faq__cta { margin-top: clamp(40px, 5vw, 56px); }
 
 @media (max-width: 680px) {
-  .faq { padding: 64px 0; }
+  .faq { padding: 40px 0; }
   .faq__deck-viewport { height: clamp(360px, 52vh, 420px); }
   .faq__panel { padding: 22px 20px; }
 }
@@ -1437,9 +1437,9 @@ img { max-width: 100%; display: block; }
   .section__head--bull,
   .section__head--bull-right {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 16px;
     min-height: 0;
-    margin-bottom: 36px;
+    margin-bottom: 24px;
     text-align: center;
   }
   .section__head--bull-right .signal__bull-slot,
@@ -1490,15 +1490,56 @@ img { max-width: 100%; display: block; }
 }
 
 @media (max-width: 680px) {
-  .section { padding: 64px 0; }
+  .section { padding: 36px 0; }
   .track__grid { grid-template-columns: 1fr; }
   .gauge__bars { grid-template-columns: 1fr; }
   .nav__ticker { display: none; }
 }
 
-/* --- Mobile phone layout (≤767px) --- */
+/* --- Mobile phone layout (≤767px) — unified vertical rhythm --- */
 @media (max-width: 767px) {
-  /* §1 Signal · §2 System — force centered intro copy (bull-right heads) */
+  /* Scene dividers + sections: tighter black space above/below */
+  .scene-break {
+    padding: 16px 16px 12px;
+  }
+  .scene-break__title--center {
+    margin-top: 6px;
+  }
+
+  .section {
+    padding: 36px 0;
+  }
+
+  .section__head {
+    margin-bottom: 20px;
+  }
+
+  .section__head h2 {
+    margin-bottom: 10px;
+  }
+
+  .section__head--bull,
+  .section__head--bull-right {
+    gap: 0;
+    min-height: 0;
+    margin-bottom: 20px;
+  }
+
+  .section__cta {
+    margin-top: 28px;
+  }
+
+  /* Bulls hidden on mobile — remove empty slot reserve from layout */
+  .signal__bull-slot,
+  .system__bull-slot,
+  .track__bull-slot,
+  .news__bull-slot,
+  .how__bull-slot,
+  .pricing__bull-slot {
+    display: none;
+  }
+
+  /* §1 Signal · §2 System — centered intro copy */
   .signal__head.section__head--bull,
   .system__head.section__head--bull {
     text-align: center;
@@ -1520,34 +1561,30 @@ img { max-width: 100%; display: block; }
     text-align: center;
   }
 
-  /* §3 Track · §4 News — tighten top spacing (bull head reserve) */
-  .track.section,
-  .news.section {
-    padding-top: 40px;
-  }
+  /* §3 Track · §4 News · §6 Pricing — no extra top reserve */
   .track__head.section__head--bull,
-  .news__head.section__head--bull {
-    gap: 16px;
+  .news__head.section__head--bull,
+  .pricing__head.section__head--bull {
+    gap: 0;
     min-height: 0;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
-  .track__head.section__head--bull .track__head-copy {
-    order: -1;
-  }
-  .track__bull-slot,
-  .news__bull-slot {
-    width: min(40vw, 200px);
-    height: min(40vw, 200px);
+  .track__head.section__head--bull .track__head-copy,
+  .news__head.section__head--bull .news__head-copy,
+  .pricing__head.section__head--bull .pricing__head-copy {
+    order: 0;
+    width: 100%;
+    text-align: center;
   }
 
   /* §5 How — center head + steps */
   .how__head.section__head--bull {
-    gap: 16px;
-    margin-bottom: 28px;
+    gap: 0;
+    margin-bottom: 20px;
     text-align: center;
   }
   .how__head.section__head--bull .how__head-copy {
-    order: -1;
+    order: 0;
     width: 100%;
     max-width: none;
     justify-self: center;
@@ -1563,7 +1600,7 @@ img { max-width: 100%; display: block; }
     text-align: center;
   }
   .how .step {
-    padding-inline: 0;
+    padding: 20px 0;
     text-align: center;
   }
   .how .step__n {
@@ -1575,5 +1612,18 @@ img { max-width: 100%; display: block; }
   }
   .how .step__note {
     text-align: center;
+  }
+
+  /* §7 FAQ */
+  .faq {
+    padding: 40px 0;
+  }
+  .faq__head {
+    margin-bottom: 24px;
+  }
+
+  /* Hero — less vertical padding on small screens */
+  .hero__inner {
+    padding: 56px 20px 48px;
   }
 }
