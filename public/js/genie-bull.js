@@ -28,7 +28,7 @@ const BULL_POSES = [
     slotSelector: ".signal__bull-slot",
     maxPx: 720,
     fillSlot: true,
-    slotScale: 0.84,
+    slotScale: 1,
     slotVAlign: "center",
     saturate: 1.05,
     contrast: 1,

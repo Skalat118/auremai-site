@@ -217,53 +217,55 @@ function fmtSignedPct(pct, dp = 2) {
   return ` (${sign}${Math.abs(pct).toFixed(dp)}%)`;
 }
 
-/** Prefer API previous_close; otherwise derive from price − change. */
-function resolvePreviousClose(price, change, previousClose) {
-  if (typeof previousClose === "number" && previousClose > 0) return previousClose;
-  if (typeof price === "number" && typeof change === "number") {
-    const prev = price - change;
-    if (prev > 0) return prev;
-  }
-  return null;
+const XAU_DAY_REF_KEY = "auremai_xau_day_ref";
+
+function utcDateKey(d = new Date()) {
+  return d.toISOString().slice(0, 10);
 }
 
-/** Normalize API change_pct when it is a decimal fraction (e.g. 0.0008 → 0.08%). */
-function normalizeChangePct(apiPct, computedPct) {
-  if (typeof apiPct !== "number" || !Number.isFinite(apiPct)) return computedPct ?? null;
-  if (apiPct === 0) return 0;
-
-  const scaled = apiPct * 100;
-  if (Math.abs(apiPct) > 0 && Math.abs(apiPct) < 0.01) return scaled;
-
-  if (typeof computedPct === "number" && Number.isFinite(computedPct)) {
-    const diffRaw = Math.abs(Math.abs(apiPct) - Math.abs(computedPct));
-    const diffScaled = Math.abs(Math.abs(scaled) - Math.abs(computedPct));
-    if (diffScaled < diffRaw && Math.abs(apiPct) < 1) return scaled;
-    return computedPct;
+/** Browser fallback when API has no day_open (local dev / cold worker cache). */
+function clientDayOpen(price) {
+  const today = utcDateKey();
+  try {
+    const stored = JSON.parse(localStorage.getItem(XAU_DAY_REF_KEY) || "null");
+    if (!stored || stored.date !== today) {
+      const dayOpen =
+        stored?.lastPrice && stored.date !== today ? stored.lastPrice : price;
+      localStorage.setItem(
+        XAU_DAY_REF_KEY,
+        JSON.stringify({ date: today, dayOpen, lastPrice: price })
+      );
+      return dayOpen;
+    }
+    stored.lastPrice = price;
+    localStorage.setItem(XAU_DAY_REF_KEY, JSON.stringify(stored));
+    return stored.dayOpen;
+  } catch {
+    return price;
   }
-
-  return apiPct;
 }
 
-function computeDailyChangePct(price, change, previousClose, apiChangePct) {
-  const prevClose = resolvePreviousClose(price, change, previousClose);
-  let computed = null;
-
-  if (prevClose != null && typeof change === "number") {
-    computed = change === 0 ? 0 : (change / prevClose) * 100;
+function resolveDailyReference(price, data) {
+  if (typeof XAU_DAY_OPEN === "number" && XAU_DAY_OPEN > 0) return XAU_DAY_OPEN;
+  if (typeof data.day_open === "number" && data.day_open > 0) return data.day_open;
+  if (typeof data.previous_close === "number" && data.previous_close > 0) {
+    return data.previous_close;
   }
+  return clientDayOpen(price);
+}
 
-  let pct =
-    computed != null && Number.isFinite(computed)
-      ? computed
-      : normalizeChangePct(apiChangePct, null);
-
-  if (pct == null || !Number.isFinite(pct)) return null;
-  if (change === 0) return 0;
-  if (typeof change === "number" && change !== 0) {
-    return Math.abs(pct) * (change > 0 ? 1 : -1);
+function resolveDailyPriceChange(data) {
+  const price = data.price;
+  const ref = resolveDailyReference(price, data);
+  if (typeof ref === "number" && ref > 0) {
+    const change = price - ref;
+    const pct = ref > 0 ? (change / ref) * 100 : 0;
+    return { change, pct };
   }
-  return pct;
+  const change = typeof data.change === "number" ? data.change : 0;
+  const prev = price - change;
+  const pct = prev > 0 ? (change / prev) * 100 : data.change_pct ?? 0;
+  return { change, pct: typeof pct === "number" ? pct : 0 };
 }
 
 function hasSinceInceptionPnl(data) {
@@ -652,14 +654,8 @@ async function refreshPrice() {
   priceEls.forEach((el) => (el.textContent = `$${fmtUSD(data.price)}`));
 
   if (changeEl) {
-    const change = typeof data.change === "number" ? data.change : 0;
-    const pct = computeDailyChangePct(
-      data.price,
-      change,
-      data.previous_close,
-      data.change_pct
-    );
-    const pctTxt = pct != null ? fmtSignedPct(pct) : "";
+    const { change, pct } = resolveDailyPriceChange(data);
+    const pctTxt = Number.isFinite(pct) ? fmtSignedPct(pct) : "";
     changeEl.textContent = `${fmtSignedUSD(change)}${pctTxt} today`;
     changeEl.className = "ticker__change " + (change > 0 ? "is-up" : change < 0 ? "is-down" : "");
   }
