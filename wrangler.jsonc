@@ -12,15 +12,5 @@
   },
   "compatibility_flags": [
     "nodejs_compat"
-  ],
-  "routes": [
-    {
-      "pattern": "auremai-software.com",
-      "custom_domain": true
-    },
-    {
-      "pattern": "www.auremai-software.com",
-      "custom_domain": true
-    }
   ]
 }
