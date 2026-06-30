@@ -446,9 +446,7 @@ function buildCombinedChartLabels(monthlyPoints, dailyPoints) {
       }
     });
     const last = dailyPoints[dailyPoints.length - 1];
-    if (last.inProgress) {
-      push({ t: last.t, label: "Today, in progress", isStart: false, isCurrent: true, inProgress: true });
-    } else {
+    if (!last.inProgress) {
       push({ t: last.t, label: formatChartDate(last.t), isStart: false, isCurrent: true });
     }
   } else if (monthlyPoints.length > 1) {
@@ -903,13 +901,7 @@ function renderGrowthChart(svg, empty, { monthlyPoints = [], dailyPoints = [], i
         .map((p) => {
           const xi = x(p.t).toFixed(1);
           const yi = yBal(p).toFixed(1);
-          let labels = "";
-          if (typeof p.pnlAmount === "number") {
-            const sign = p.pnlAmount >= 0 ? "+" : "−";
-            const pnlTxt = `${sign}$${fmtUSD(Math.abs(p.pnlAmount))}`;
-            labels += `<text class="chart__pnl-label" x="${xi}" y="${(yBal(p) - 10).toFixed(1)}" text-anchor="middle">${pnlTxt}</text>`;
-          }
-          return `${labels}<circle class="chart__dot chart__dot--growth" cx="${xi}" cy="${yi}" r="4.5" />`;
+          return `<circle class="chart__dot chart__dot--growth" cx="${xi}" cy="${yi}" r="4.5" />`;
         })
         .join("")
     : "";
