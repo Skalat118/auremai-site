@@ -33,7 +33,7 @@ const REAL_MONTHLY_RETURN_PCT = {
   "2026-03": 13.32,
   "2026-04": 13.76,
   "2026-05": 14.78,
-  "2026-06": 16.47,
+  "2026-06": 23.08,
 };
 
 // Max floating drawdown shown on the equity line (never above this %).
