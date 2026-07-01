@@ -901,7 +901,9 @@ img { max-width: 100%; display: block; }
 }
 .monthly-table td:last-child,
 .monthly-table th:last-child { text-align: right; }
-.monthly-table td:nth-child(2) { font-family: var(--font-mono); }
+.monthly-table td:nth-child(2),
+.monthly-table td:nth-child(3) { font-family: var(--font-mono); }
+.monthly-balance { color: var(--ink-soft); }
 .monthly-pnl.is-up { color: var(--bull); }
 .monthly-pnl.is-down { color: var(--bear); }
 .monthly-pnl.is-pending { color: var(--ink-muted); font-style: normal; }
@@ -1866,7 +1868,8 @@ img { max-width: 100%; display: block; }
   .monthly-table th:last-child {
     padding-right: 4px;
   }
-  .monthly-table td:nth-child(2) {
+  .monthly-table td:nth-child(2),
+  .monthly-table td:nth-child(3) {
     padding-left: 8px;
     padding-right: 8px;
   }

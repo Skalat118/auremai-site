@@ -38,3 +38,65 @@ const REAL_MONTHLY_RETURN_PCT = {
 
 // Max floating drawdown shown on the equity line (never above this %).
 const MAX_CHART_DRAWDOWN_PCT = 10;
+
+/**
+ * Pricing tiers — edit prices and paste Stripe Payment Links below.
+ * stripeUrl: full https://buy.stripe.com/… link (leave "" until ready).
+ */
+const PRICING_TIERS = [
+  {
+    id: "starter",
+    label: "Starter",
+    min: 500,
+    max: 2499,
+    monthly: 39,
+    description: "Automate your gold trading from day one",
+    stripeUrl: "https://buy.stripe.com/6oUdR8dHRaCd78q7Lsawo00",
+  },
+  {
+    id: "growth",
+    label: "Growth",
+    min: 2500,
+    max: 9999,
+    monthly: 69,
+    description: "Consistent performance for growing accounts",
+    stripeUrl: "https://buy.stripe.com/7sYbJ08nx39LboG1n4awo03",
+  },
+  {
+    id: "plus",
+    label: "Plus",
+    min: 10000,
+    max: 24999,
+    monthly: 149,
+    description: "Advanced money management on mid-size capital",
+    stripeUrl: "https://buy.stripe.com/8x2aEW6fpdOp1O68Pwawo04",
+  },
+  {
+    id: "pro",
+    label: "Pro",
+    min: 25000,
+    max: 49999,
+    monthly: 249,
+    description: "Professional grade automation for serious traders",
+    featured: true,
+    stripeUrl: "https://buy.stripe.com/fZubJ09rB39LcsKghYawo05",
+  },
+  {
+    id: "elite",
+    label: "Elite",
+    min: 50000,
+    max: null,
+    monthly: 499,
+    description: "Maximum performance for large capital accounts",
+    stripeUrl: "https://buy.stripe.com/dRmfZg8nxfWx0K25Dkawo06",
+  },
+  {
+    id: "institutional",
+    label: "Institutional",
+    min: 100000,
+    max: null,
+    monthly: null,
+    description: "Custom setup for funds and professional traders",
+    contact: true,
+  },
+];
