@@ -239,22 +239,6 @@ html:not(.no-gsap) [data-reveal] {
   .footer__mark { animation: none; }
 }
 
-.btn {
-  position: relative;
-  overflow: hidden;
-}
-
-.btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.22) 50%, transparent 60%);
-  transform: translateX(-120%);
-  transition: transform 0.55s ease;
-}
-
-.btn:hover::before { transform: translateX(120%); }
-
 .btn--gold:hover {
   box-shadow:
     0 14px 32px -10px rgba(212, 168, 67, 0.75),
@@ -371,6 +355,5 @@ html:not(.no-gsap) [data-reveal] {
   }
   .scene-canvas { display: none !important; }
   .bull-stage { display: none !important; }
-  .btn::before { display: none; }
   .btn.is-confirming { animation: none; }
 }
