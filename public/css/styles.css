@@ -633,8 +633,10 @@ img { max-width: 100%; display: block; }
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  padding-bottom: 0.18em;
+  margin-bottom: -0.18em;
 }
-.hero__line { display: block; overflow: hidden; padding-bottom: 0.08em; }
+.hero__line { display: block; overflow: hidden; padding-bottom: 0.14em; }
 .hero__word { display: inline-block; will-change: transform; }
 
 .ticker {
