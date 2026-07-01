@@ -1241,6 +1241,7 @@ document.addEventListener("DOMContentLoaded", () => {
   poll(refreshMonthly, POLL.monthly);
   poll(refreshNews, POLL.news);
 
+  refreshMonthly();
   refreshPerformance().then(() => {
     refreshHistory();
     refreshMonthly();

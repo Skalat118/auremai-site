@@ -26,7 +26,8 @@ const POLL = {
   news: 120000,
 };
 
-// Confirmed monthly return % (on balance at month start). Add keys as real data arrives.
+// Confirmed monthly return % — used by the equity chart fallback only.
+// The monthly P&L table always reads live rows from GET /api/performance/monthly.
 const REAL_MONTHLY_RETURN_PCT = {
   "2026-01": 17.67,
   "2026-02": 17.68,
