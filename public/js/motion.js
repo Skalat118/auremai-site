@@ -162,7 +162,33 @@ function observeNewsReveal() {
   mo.observe(list, { childList: true });
 }
 
+/* ------------------------- headline line breaks at periods ------------------------- */
+function wrapHeadlinePeriods() {
+  $$(".section__head h2, .faq__head h2").forEach((heading) => {
+    if (heading.querySelector(".headline-part")) return;
+
+    const text = heading.textContent.trim();
+    if (!text.includes(".")) return;
+
+    const parts = text
+      .split(/(?<=\.)\s+/)
+      .map((part) => part.trim())
+      .filter(Boolean);
+
+    if (parts.length <= 1) return;
+
+    heading.textContent = "";
+    parts.forEach((part) => {
+      const line = document.createElement("span");
+      line.className = "headline-part";
+      line.textContent = part;
+      heading.appendChild(line);
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  wrapHeadlinePeriods();
   initScrollSpy();
   initScrollProgress();
   initHoverGlow();
