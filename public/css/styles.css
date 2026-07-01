@@ -903,7 +903,15 @@ img { max-width: 100%; display: block; }
 .monthly-table th:last-child { text-align: right; }
 .monthly-table td:nth-child(2),
 .monthly-table td:nth-child(3) { font-family: var(--font-mono); }
+.monthly-table__pnl {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 .monthly-balance { color: var(--ink-soft); }
+.monthly-row--live .monthly-balance { color: var(--ink); }
 .monthly-pnl.is-up { color: var(--bull); }
 .monthly-pnl.is-down { color: var(--bear); }
 .monthly-pnl.is-pending { color: var(--ink-muted); font-style: normal; }

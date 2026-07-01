@@ -281,49 +281,13 @@ function monthRangeFromStart(trackingStart) {
   return months;
 }
 
-function currentMonthKey() {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
-}
-
-function normalizeMonthlyTableRows(data) {
-  const trackingStart = data?.tracking_start;
-  const apiRows = Array.isArray(data?.months) ? data.months : [];
-  if (!trackingStart) return apiRows;
-
-  const currentMk = currentMonthKey();
-  const byMonth = new Map(apiRows.map((row) => [row.month, row]));
-  const calendarMonths = monthRangeFromStart(trackingStart);
-
-  return calendarMonths.map((month) => {
-    const fromApi = byMonth.get(month);
-    const isCurrent = month === currentMk;
-
-    if (!fromApi) {
-      return {
-        month,
-        available: false,
-        in_progress: isCurrent,
-      };
-    }
-
-    return {
-      ...fromApi,
-      in_progress: isCurrent ? true : false,
-    };
-  });
-}
-
-function normalizeMonthlyResponse(data) {
-  if (!data?.tracking_start) return data;
-  return {
-    ...data,
-    months: normalizeMonthlyTableRows(data),
-  };
+function monthlyTableRowsFromApi(data) {
+  const rows = Array.isArray(data?.months) ? data.months : [];
+  return [...rows].sort((a, b) => String(a.month).localeCompare(String(b.month)));
 }
 
 function formatMonthlyPnlCell(row) {
-  if (!row.available || typeof row.pnl_amount !== "number") return "Data pending";
+  if (!row.available || typeof row.pnl_amount !== "number") return "—";
   let text = fmtSignedUSD(row.pnl_amount);
   if (typeof row.pnl_percent === "number") {
     text += fmtSignedPct(row.pnl_percent, 1);
@@ -1097,7 +1061,7 @@ async function refreshHistory() {
   }
 
   const [monthlyData, dailyData] = await Promise.all([api.monthly(), api.daily()]);
-  const monthlyNorm = normalizeMonthlyResponse(monthlyData);
+  const monthlyNorm = { ...monthlyData, months: monthlyTableRowsFromApi(monthlyData) };
   const dailyPoints = parseDailyChartPoints(dailyData, perf.initial_balance);
   const firstDailyDayStart = dailyPoints[0]?.date
     ? new Date(`${dailyPoints[0].date}T00:00:00`).getTime()
@@ -1128,14 +1092,14 @@ async function refreshMonthly() {
     return;
   }
 
-  const rows = normalizeMonthlyTableRows(data);
+  const rows = monthlyTableRowsFromApi(data);
 
   revealDynamic(wrap);
   if (empty) empty.hidden = true;
 
   if (note && data.tracking_start && typeof data.initial_balance === "number") {
     const since = formatTrackingStart(data.tracking_start);
-    note.textContent = `Since ${since} · $${fmtUSD(data.initial_balance)} starting balance. Figures match the live monthly API — missing months stay pending.`;
+    note.textContent = `Since ${since} · $${fmtUSD(data.initial_balance)} starting balance. End balance and monthly P&L from the live account feed.`;
   }
 
   body.innerHTML = rows
@@ -1151,19 +1115,18 @@ async function refreshMonthly() {
           ? `monthly-pnl ${row.pnl_amount >= 0 ? "is-up" : "is-down"}`
           : "monthly-pnl is-pending";
 
-      let statusHtml = '<span class="monthly-tag monthly-tag--pending">Data pending</span>';
-      if (row.available && typeof row.pnl_amount === "number") {
-        statusHtml = row.in_progress
-          ? '<span class="monthly-tag monthly-tag--progress">In progress</span>'
-          : '<span class="monthly-tag monthly-tag--confirmed">Confirmed</span>';
-      }
+      const statusHtml = row.in_progress
+        ? '<span class="monthly-tag monthly-tag--progress">In progress</span>'
+        : "";
 
       return `
-        <tr>
+        <tr${row.in_progress ? ' class="monthly-row--live"' : ""}>
           <td>${escapeHtml(month)}</td>
           <td><span class="monthly-balance">${escapeHtml(balanceText)}</span></td>
-          <td><span class="${pnlClass}">${escapeHtml(pnlText)}</span></td>
-          <td>${statusHtml}</td>
+          <td class="monthly-table__pnl">
+            <span class="${pnlClass}">${escapeHtml(pnlText)}</span>
+            ${statusHtml}
+          </td>
         </tr>`;
     })
     .join("");
