@@ -22,6 +22,7 @@ const api = {
   history: () => apiGet("/api/performance/history"),
   monthly: () => apiGet("/api/performance/monthly"),
   daily: () => apiGet("/api/performance/daily"),
+  tiers: () => apiGet("/api/tiers"),
 };
 
 /**

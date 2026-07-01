@@ -355,12 +355,54 @@
     });
   }
 
-  /* ===================== PRICING — perspective fan ===================== */
+  /* ===================== PRICING — tier cards ===================== */
+  function animateTierCards() {
+    const cards = gsap.utils.toArray(".tier-card:not(.tier-card--contact)");
+    if (!cards.length) return;
+
+    gsap.set(cards, { rotateY: 18, opacity: 0, z: -60, transformPerspective: 1000 });
+    gsap.to(cards, {
+      rotateY: 0,
+      opacity: 1,
+      z: 0,
+      duration: 0.85,
+      stagger: 0.1,
+      ease: EASE,
+      scrollTrigger: { trigger: ".tier-grid", start: "top 82%", once: true },
+    });
+
+    const featured = document.querySelector(".tier-card--featured");
+    if (featured) {
+      gsap.fromTo(
+        featured,
+        { scale: 0.96, boxShadow: "0 0 0 rgba(0,0,0,0)" },
+        {
+          scale: 1,
+          boxShadow: "0 24px 60px -20px rgba(0,0,0,0.75)",
+          duration: 0.75,
+          ease: "power2.out",
+          scrollTrigger: { trigger: featured, start: "top 82%", once: true },
+        }
+      );
+    }
+
+    const contact = document.querySelector(".tier-card--contact");
+    if (contact) {
+      gsap.from(contact, {
+        y: 24,
+        opacity: 0,
+        duration: 0.7,
+        ease: EASE,
+        scrollTrigger: { trigger: contact, start: "top 88%", once: true },
+      });
+    }
+  }
+
   function initPricing() {
     const sec = document.getElementById("pricing");
     if (!sec) return;
 
-    gsap.from("#pricing .section__head > *", {
+    gsap.from("#pricing .section__head > *, #pricing .pricing-billing", {
       y: 32,
       opacity: 0,
       stagger: 0.1,
@@ -369,25 +411,7 @@
       scrollTrigger: { trigger: sec, start: "top 75%" },
     });
 
-    const plans = gsap.utils.toArray(".plan");
-    gsap.set(plans, { rotateY: 22, opacity: 0, z: -80, transformPerspective: 1000 });
-    gsap.to(plans, {
-      rotateY: 0,
-      opacity: 1,
-      z: 0,
-      duration: 0.95,
-      stagger: 0.14,
-      ease: EASE,
-      scrollTrigger: { trigger: ".plans", start: "top 78%" },
-    });
-
-    gsap.from(".plan--featured", {
-      scale: 0.94,
-      boxShadow: "0 0 0 rgba(0,0,0,0)",
-      duration: 0.8,
-      ease: "power2.out",
-      scrollTrigger: { trigger: ".plan--featured", start: "top 80%" },
-    });
+    animateTierCards();
   }
 
   /* ===================== FAQ — deck intro ===================== */
@@ -530,7 +554,7 @@
     ScrollTrigger.refresh();
   }
 
-  window.AuremScroll = { bindChartDraw, registerNewsItems, revealElement, revealVisibleNow };
+  window.AuremScroll = { bindChartDraw, registerNewsItems, revealElement, revealVisibleNow, refreshPricing: animateTierCards };
 })();
 
 if (typeof gsap === "undefined") {

@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=20260630g" />
+  <link rel="stylesheet" href="css/styles.css?v=20260701b" />
   <link rel="stylesheet" href="css/motion.css?v=20260714" />
 </head>
 <body>
@@ -516,56 +516,27 @@
           <div class="pricing__bull-slot" aria-hidden="true"></div>
           <div class="pricing__head-copy">
             <span class="eyebrow" data-reveal>Pricing</span>
-            <h2 data-reveal>Pick your term. Cancel the rest of the noise.</h2>
+            <h2 data-reveal>Pick the tier that fits your account.</h2>
             <p class="section__lead" data-reveal>
-              Every plan is the same system and the same live signal. Longer terms
-              simply cost less per month. No martingale, no grid. Every trade
-              carries predefined take profit and stop loss.
+              One system. One live signal. Your monthly rate is tied to your MT5
+              balance when you subscribe.
             </p>
           </div>
         </div>
 
-        <div class="plans" data-reveal-group>
-          <div class="plan card hover-lift hover-glow" data-reveal>
-            <h3 class="plan__name">Monthly</h3>
-            <div class="plan__price"><span class="plan__cur">€</span>39<span class="plan__per">/mo</span></div>
-            <p class="plan__note">Billed monthly. Try it on the live signal.</p>
-            <ul class="plan__features">
-              <li>Full access to the AuremAI system</li>
-              <li>Live signal driven position sizing</li>
-              <li>Setup &amp; support over Telegram</li>
-            </ul>
-            <a class="btn btn--ghost btn--block" href="https://buy.stripe.com/6oUdR8dHRaCd78q7Lsawo00" data-checkout="monthly" data-macro-action data-confirm-label="Tap again to get started">Get started</a>
-          </div>
-
-          <div class="plan card plan--featured hover-lift hover-glow" data-reveal>
-            <span class="plan__badge">Best value · ≈€33/mo</span>
-            <h3 class="plan__name">Quarterly</h3>
-            <div class="plan__price"><span class="plan__cur">€</span>99<span class="plan__per">/3mo</span></div>
-            <p class="plan__note">Billed every three months.</p>
-            <ul class="plan__features">
-              <li>Everything in Monthly</li>
-              <li>Priority Telegram support</li>
-              <li>Best balance of cost and commitment</li>
-            </ul>
-            <a class="btn btn--gold btn--block" href="https://buy.stripe.com/bJe8wO8nxaCdboG3vcawo01" data-checkout="quarterly" data-macro-action data-confirm-label="Tap again to get started">Get started</a>
-          </div>
-
-          <div class="plan card hover-lift hover-glow" data-reveal>
-            <h3 class="plan__name">Annual</h3>
-            <div class="plan__price"><span class="plan__cur">€</span>299<span class="plan__per">/yr</span></div>
-            <p class="plan__note">Billed yearly · ≈€25/mo, the lowest rate.</p>
-            <ul class="plan__features">
-              <li>Everything in Quarterly</li>
-              <li>Lowest monthly cost</li>
-              <li>A full year on the live signal</li>
-            </ul>
-            <a class="btn btn--ghost btn--block" href="https://buy.stripe.com/aFabJ0bzJ7q164m3vcawo02" data-checkout="annual" data-macro-action data-confirm-label="Tap again to get started">Get started</a>
+        <div class="pricing-billing" data-reveal aria-label="Billing period">
+          <div class="pricing-billing__track">
+            <button type="button" class="pricing-billing__opt is-active" data-billing="monthly" aria-pressed="true" disabled>Monthly</button>
           </div>
         </div>
-        <p class="pricing__foot">
-          Checkout is secure via Stripe. After payment, message <a href="#" data-telegram>@auremAIsupport</a> on Telegram for setup and broker onboarding.
-          After access is confirmed, we send you the VT Markets partner link on Telegram before installing. This is required for performance parity with our live track record.
+
+        <p class="tier-grid__status" data-tier-status>Loading plans…</p>
+        <div class="tier-grid" data-tier-grid data-reveal-group aria-live="polite"></div>
+
+        <p class="pricing__disclaimer" data-reveal>
+          Tier is based on your MT5 account balance at time of purchase and remains fixed
+          for the duration of your billing period. Past performance does not guarantee
+          future results.
         </p>
       </div>
     </section>
@@ -808,12 +779,13 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.min.js"></script>
   <script src="js/config.js?v=20260630a"></script>
-  <script src="js/api.js?v=20260702"></script>
+  <script src="js/api.js?v=20260701b"></script>
   <script src="js/app.js?v=20260701a"></script>
   <script src="js/motion.js?v=20260701a"></script>
   <script src="js/scene-three.js"></script>
-  <script src="js/scroll-cinema.js?v=20260713"></script>
+  <script src="js/scroll-cinema.js?v=20260714"></script>
   <script src="js/faq-deck.js?v=20260713"></script>
+  <script src="js/pricing-tiers.js?v=20260701b"></script>
   <script src="js/genie-bull.js?v=20260630c"></script>
 </body>
 </html>
