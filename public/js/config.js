@@ -11,6 +11,7 @@ const API_BASE = isLocalHost ? "http://84.55.8.245:8000" : "";
 
 const TELEGRAM_URL = "https://t.me/auremAIsupport";
 const TELEGRAM_HANDLE = "@auremAIsupport";
+const COMMUNITY_TELEGRAM_URL = "https://t.me/+F5bnXj-wqW0wZTBk";
 
 // TODO: replace with your VT Markets IB / affiliate registration link when ready.
 const VT_MARKETS_PARTNER_URL = "https://www.vtmarkets.com/";

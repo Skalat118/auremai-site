@@ -357,7 +357,7 @@
 
   /* ===================== PRICING — tier cards ===================== */
   function animateTierCards() {
-    const cards = gsap.utils.toArray(".tier-card:not(.tier-card--contact)");
+    const cards = gsap.utils.toArray(".tier-card");
     if (!cards.length) return;
 
     gsap.set(cards, { rotateY: 18, opacity: 0, z: -60, transformPerspective: 1000 });
@@ -385,17 +385,6 @@
         }
       );
     }
-
-    const contact = document.querySelector(".tier-card--contact");
-    if (contact) {
-      gsap.from(contact, {
-        y: 24,
-        opacity: 0,
-        duration: 0.7,
-        ease: EASE,
-        scrollTrigger: { trigger: contact, start: "top 88%", once: true },
-      });
-    }
   }
 
   function initPricing() {
@@ -412,6 +401,20 @@
     });
 
     animateTierCards();
+  }
+
+  function initCommunity() {
+    const sec = document.getElementById("community");
+    if (!sec) return;
+
+    gsap.from("#community .community__panel > *", {
+      y: 24,
+      opacity: 0,
+      stagger: 0.08,
+      duration: 0.75,
+      ease: EASE,
+      scrollTrigger: { trigger: sec, start: "top 82%" },
+    });
   }
 
   /* ===================== FAQ — deck intro ===================== */
@@ -538,6 +541,7 @@
     initNews();
     initHow();
     initPricing();
+    initCommunity();
     initFaq();
     initFooter();
     initRevealFallback();

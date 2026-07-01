@@ -1233,14 +1233,6 @@ img { max-width: 100%; display: block; }
   transform: translateY(-6px);
   padding-top: 52px;
 }
-.tier-card--contact {
-  grid-column: 1 / -1;
-  max-width: 520px;
-  margin: 12px auto 0;
-  text-align: center;
-  align-items: center;
-}
-.tier-card--contact .tier-card__desc { max-width: 36ch; flex: 0 0 auto; }
 
 .tier-card__badge {
   position: absolute;
@@ -1270,7 +1262,6 @@ img { max-width: 100%; display: block; }
   border: 1px solid rgba(139, 92, 246, 0.28);
   background: rgba(139, 92, 246, 0.08);
 }
-.tier-card--contact .tier-card__range { align-self: center; }
 
 .tier-card__name {
   font-family: var(--font-display);
@@ -1293,11 +1284,6 @@ img { max-width: 100%; display: block; }
   line-height: 1;
   color: var(--gold-400);
   margin-bottom: 22px;
-}
-.tier-card__price--contact {
-  font-size: 1.55rem;
-  letter-spacing: -0.01em;
-  color: var(--violet-300);
 }
 .tier-card__cur {
   font-size: 1.25rem;
@@ -1371,6 +1357,57 @@ img { max-width: 100%; display: block; }
   transform: rotate(-45deg);
 }
 .pricing__foot { text-align: center; margin-top: 26px; color: var(--ink-muted); font-size: 0.88rem; }
+
+/* ============================== COMMUNITY ============================== */
+.community {
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+}
+.community__panel {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 40px) clamp(22px, 4vw, 36px);
+  text-align: center;
+}
+.community__panel .eyebrow {
+  display: inline-block;
+  margin-bottom: 14px;
+}
+.community__panel h2 {
+  margin: 0 0 12px;
+  font-size: clamp(1.55rem, 4vw, 2rem);
+  line-height: 1.12;
+}
+.community__lead {
+  margin: 0 auto 22px;
+  max-width: 42ch;
+}
+.community__list {
+  list-style: none;
+  margin: 0 auto 28px;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  max-width: 34ch;
+  text-align: left;
+}
+.community__list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.community__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.58em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--violet-400);
+}
 
 /* ============================== FAQ — rotating deck ============================== */
 .faq {
@@ -1658,7 +1695,6 @@ img { max-width: 100%; display: block; }
   .how .step__note { text-align: center; }
   .tier-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
   .tier-card--featured { transform: none; }
-  .tier-card--contact { max-width: 100%; }
   .plans { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
   .plan--featured { transform: none; }
 }
@@ -1888,45 +1924,5 @@ img { max-width: 100%; display: block; }
   .monthly-tag {
     min-height: 26px;
     padding: 0 10px;
-  }
-
-  /* Pricing — compact Institutional row on phones */
-  .tier-card--contact {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-areas:
-      "range cta"
-      "name cta";
-    gap: 8px 14px;
-    padding: 14px 16px;
-    margin-top: 4px;
-    text-align: left;
-    align-items: center;
-  }
-  .tier-card--contact .tier-card__range {
-    grid-area: range;
-    margin-bottom: 0;
-    align-self: center;
-  }
-  .tier-card--contact .tier-card__name {
-    grid-area: name;
-    margin: 0;
-    font-size: 1.15rem;
-    line-height: 1.2;
-  }
-  .tier-card--contact .tier-card__desc {
-    display: none;
-  }
-  .tier-card--contact .tier-card__price--contact {
-    display: none;
-  }
-  .tier-card--contact .tier-card__cta {
-    grid-area: cta;
-    margin-top: 0;
-    width: auto;
-    align-self: center;
-    white-space: nowrap;
-    --btn-pad: 10px 16px;
-    font-size: 0.88rem;
   }
 }
