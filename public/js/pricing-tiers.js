@@ -3,9 +3,9 @@
  */
 
 const TIER_DESCRIPTIONS = {
-  starter: "Perfect to start automating your gold trading",
-  growth: "For growing accounts looking for consistent results",
-  plus: "Advanced money management on mid-size accounts",
+  starter: "Automate your gold trading from day one",
+  growth: "Consistent performance for growing accounts",
+  plus: "Advanced money management on mid-size capital",
   pro: "Professional grade automation for serious traders",
   elite: "Maximum performance for large capital accounts",
   institutional: "Custom setup for funds and professional traders",
@@ -61,7 +61,7 @@ function renderPaidTierCard(tier) {
       <h3 class="tier-card__name">${name}</h3>
       <p class="tier-card__desc">${desc}</p>
       ${priceHtml}
-      <a class="btn ${id === "pro" ? "btn--gold" : "btn--ghost"} btn--block tier-card__cta" href="#" data-tier-cta>Get started</a>
+      <a class="btn ${id === "pro" ? "btn--gold" : "btn--ghost"} btn--block tier-card__cta" href="#" data-tier-cta>Get Started</a>
     </article>
   `;
 }
@@ -69,7 +69,9 @@ function renderPaidTierCard(tier) {
 function renderInstitutionalCard(tier) {
   const name = escapeHtml(tier?.label || "Institutional");
   const desc = escapeHtml(tier ? tierDescription(tier) : TIER_DESCRIPTIONS.institutional);
-  const range = tier ? escapeHtml(formatTierRange(tier.min, tier.max)) : "Custom";
+  const range = tier
+    ? escapeHtml(formatTierRange(tier.min, tier.max))
+    : "$50,000+";
 
   return `
     <article class="tier-card tier-card--contact card hover-lift hover-glow" data-tier-id="institutional">

@@ -1188,9 +1188,14 @@ img { max-width: 100%; display: block; }
 
 .tier-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 20px;
   align-items: stretch;
+}
+@media (min-width: 1080px) {
+  .tier-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
 }
 .tier-grid__status {
   text-align: center;
