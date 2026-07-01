@@ -628,6 +628,12 @@ img { max-width: 100%; display: block; }
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+.hero__word--gold {
+  background: linear-gradient(90deg, var(--violet-300) 0%, var(--gold-400) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 .hero__line { display: block; overflow: hidden; padding-bottom: 0.08em; }
 .hero__word { display: inline-block; will-change: transform; }
 
