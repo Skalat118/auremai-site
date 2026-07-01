@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AuremAI — The signal arrives before the price does</title>
+  <title>AuremAI · Algorithmic gold trading on XAUUSD</title>
   <meta name="description" content="AuremAI is an algorithmic trading system for gold (XAUUSD) that reads a live macro &amp; geopolitical news signal to size every position dynamically. Watch the live account." />
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
@@ -38,9 +38,9 @@
       <div class="nav__right">
         <span class="nav__ticker" id="navTicker" aria-live="polite">
           <span class="nav__ticker-label">XAU/USD</span>
-          <span class="nav__ticker-price" data-price>—</span>
+          <span class="nav__ticker-price" data-price>…</span>
         </span>
-        <a class="btn btn--gold btn--nav" href="#" data-telegram data-macro-action data-confirm-label="Tap again — Get started">Get started</a>
+        <a class="btn btn--gold btn--nav" href="#" data-telegram data-macro-action data-confirm-label="Tap again to get started">Get started</a>
       </div>
     </div>
   </header>
@@ -60,21 +60,22 @@
             <span class="hero__line"><span class="hero__word">emotion.</span> <span class="hero__word">We</span> <span class="hero__word">don't</span> <span class="hero__word">have</span> <span class="hero__word hero__word--gold">any.</span></span>
           </h1>
           <p class="hero__sub" data-reveal>
-            AI-enhanced gold trading software — breakout and liquidity zone strategy
-            on XAUUSD. A live macro signal sizes every position: cautious when the
-            picture is unclear, assertive when it is strong.
+            Gold moves on fear, headlines, and second guessing. AuremAI reads the macro
+            picture on XAUUSD and trades breakouts at liquidity zones with no emotion in
+            the loop. When the signal is unclear, it steps back. When the signal is
+            strong, it acts with size.
           </p>
 
           <div class="ticker hover-glow" id="heroTicker" aria-live="polite" data-reveal>
             <div class="ticker__main">
               <span class="ticker__symbol">XAU/USD</span>
-              <span class="ticker__price" data-price>—</span>
+              <span class="ticker__price" data-price>…</span>
             </div>
             <span class="ticker__change" data-change>Connecting to live feed…</span>
           </div>
 
           <div class="hero__cta" data-reveal>
-            <a class="btn btn--gold btn--lg" href="#" data-telegram data-macro-action data-confirm-label="Tap again — Get started">Get started</a>
+            <a class="btn btn--gold btn--lg" href="#" data-telegram data-macro-action data-confirm-label="Tap again to get started">Get started</a>
           </div>
         </div>
       </div>
@@ -98,8 +99,8 @@
             <span class="eyebrow" data-reveal>The Signal</span>
             <h2 data-reveal>Emotion is noise. This is the signal.</h2>
             <p class="section__lead" data-reveal>
-              A monitoring process scans for high-relevance, gold-moving news every few
-              hours — Fed and FOMC policy, CPI/PCE/NFP and other US macro data, major
+              A monitoring process scans for news that actually moves gold every few
+              hours: Fed and FOMC policy, CPI/PCE/NFP and other US macro data, major
               geopolitical shifts, and sudden unexplained moves in gold. A strict filter
               throws out speculation and stale news. What remains becomes a precise number
               that drives every positioning decision.
@@ -119,39 +120,39 @@
                 <circle class="gauge__hub" cx="100" cy="110" r="6" />
               </svg>
               <div class="gauge__readout">
-                <span class="gauge__bias" data-bias-label>—</span>
+                <span class="gauge__bias" data-bias-label>…</span>
                 <span class="gauge__meta" data-bias-meta>Reading the signal…</span>
               </div>
             </div>
             <div class="gauge__bars">
               <div class="metric">
                 <span class="metric__k">Direction</span>
-                <span class="metric__v" data-directional>—</span>
+                <span class="metric__v" data-directional>…</span>
                 <span class="metric__hint">0 = bearish · 50 = neutral · 100 = bullish</span>
               </div>
               <div class="metric">
                 <span class="metric__k">Strength</span>
-                <span class="metric__v" data-strength>—</span>
+                <span class="metric__v" data-strength>…</span>
                 <span class="metric__hint">how strong the signal is, regardless of direction</span>
               </div>
             </div>
-            <p class="gauge__note">Updates automatically — no manual input. <span data-bias-updated></span></p>
+            <p class="gauge__note">Updates automatically with no manual input. <span data-bias-updated></span></p>
             </div>
           </div>
 
           <div class="signal__explain" data-reveal="up">
             <ul class="feature-list">
               <li data-reveal>
-                <h3>Weighted by what actually moves gold</h3>
-                <p>Each item is tagged by category, in order of weight: <strong>Fed policy</strong> &rarr; key macro &rarr; major geopolitics &rarr; secondary macro &rarr; general — plus a bullish, bearish, or neutral bias.</p>
+                <h3>Only what moves gold gets a vote</h3>
+                <p>Headlines flood the feed every hour. Fed policy, key macro, geopolitics, and the rest are ranked by what actually shakes gold. Each item lands with a bullish, bearish, or neutral read.</p>
               </li>
               <li data-reveal>
-                <h3>Time-decay, not hard cutoffs</h3>
-                <p>A news item's influence halves roughly every six hours, so the signal glides smoothly instead of jumping when an item ages out.</p>
+                <h3>Stories fade. The signal does not jump.</h3>
+                <p>A headline does not vanish at midnight. Its influence halves every six hours, so the reading drifts smoothly instead of snapping when one story ages out.</p>
               </li>
               <li data-reveal>
-                <h3>From signal to position</h3>
-                <p>The trading system reads the signal per pending order and adjusts the <strong>risk tier — low, medium, or high</strong> — and the take-profit distance. Trades that run against the current signal use a separate, lower fixed tier.</p>
+                <h3>The number becomes the position</h3>
+                <p>Every pending order asks the same question: how strong is the signal right now? The answer sets risk as <strong>low, medium, or high</strong>, and shapes the take profit distance. Trades against the current read use a separate, smaller fixed tier.</p>
               </li>
             </ul>
           </div>
@@ -170,7 +171,7 @@
         </div>
 
         <div class="section__cta section__cta--center" data-reveal>
-          <a class="btn btn--gold btn--lg" href="#" data-telegram data-macro-action data-confirm-label="Tap again — Get started">Get started</a>
+          <a class="btn btn--gold btn--lg" href="#" data-telegram data-macro-action data-confirm-label="Tap again to get started">Get started</a>
         </div>
       </div>
     </section>
@@ -191,11 +192,11 @@
         <div class="section__head system__head section__head--bull section__head--bull-right" data-reveal-group>
           <div class="system__head-copy">
             <span class="eyebrow" data-reveal>The System</span>
-            <h2 data-reveal>No hesitation. No revenge trades. No second-guessing.</h2>
+            <h2 data-reveal>No hesitation. No revenge trades. No second guessing.</h2>
             <p class="section__lead" data-reveal>
               AuremAI analyses the market in depth, places pending orders at key
               liquidity levels, and enters only when price confirms the move. Open
-              positions are managed with a dynamic trailing stop — protecting profit
+              positions are managed with a dynamic trailing stop, protecting profit
               while letting winners run. Zero emotional interference.
             </p>
           </div>
@@ -221,7 +222,7 @@
               <div class="metric">
                 <span class="metric__k">Entry style</span>
                 <span class="metric__v">Breakout</span>
-                <span class="metric__hint">confirmed fills only — no market chasing</span>
+                <span class="metric__hint">confirmed fills only, no market chasing</span>
               </div>
               <div class="metric">
                 <span class="metric__k">Risk model</span>
@@ -237,7 +238,7 @@
               <h3>Surgical execution</h3>
               <p>
                 Pending orders sit at structural levels. The system waits for price
-                confirmation before filling — no chasing, no impulsive entries.
+                confirmation before filling, with no chasing and no impulsive entries.
               </p>
             </li>
             <li class="system-feature card hover-lift hover-glow" data-reveal>
@@ -252,8 +253,8 @@
               <span class="system-feature__idx" aria-hidden="true">03</span>
               <h3>Risk your way</h3>
               <p>
-                Fully customisable: fixed lot size, or percentage-based risk to
-                harness compound growth over time — on your terms.
+                Fully customisable: fixed lot size, or percentage based risk to
+                harness compound growth over time, on your terms.
               </p>
             </li>
           </ul>
@@ -272,11 +273,11 @@
         </div>
 
         <blockquote class="system__quote" data-reveal>
-          <p>A structured, controlled, and professional approach — built to trade strategically and stress-free, without emotion.</p>
+          <p>A structured, controlled, and professional approach, built to trade strategically and stress free, without emotion.</p>
         </blockquote>
 
         <div class="section__cta section__cta--center" data-reveal>
-          <a class="btn btn--gold btn--lg" href="#" data-telegram data-macro-action data-confirm-label="Tap again — Get started">Get started</a>
+          <a class="btn btn--gold btn--lg" href="#" data-telegram data-macro-action data-confirm-label="Tap again to get started">Get started</a>
         </div>
       </div>
     </section>
@@ -309,8 +310,8 @@
         </div>
 
         <div class="track__stale" data-stale hidden>
-          <strong>Heads up:</strong> the live feed is reporting stale data right now —
-          the numbers below may be behind. They'll refresh automatically once the
+          <strong>Heads up:</strong> the live feed is reporting stale data right now.
+          The numbers below may be behind. They'll refresh automatically once the
           account reports in again.
         </div>
 
@@ -319,20 +320,20 @@
         <div class="track__grid" data-reveal-group>
           <div class="stat-card card hover-lift hover-glow" data-reveal>
             <span class="stat-card__k">Equity</span>
-            <span class="stat-card__v" data-equity>—</span>
+            <span class="stat-card__v" data-equity>…</span>
           </div>
           <div class="stat-card card hover-lift hover-glow" data-reveal>
             <span class="stat-card__k">Balance</span>
-            <span class="stat-card__v" data-balance>—</span>
+            <span class="stat-card__v" data-balance>…</span>
           </div>
           <div class="stat-card card stat-card--pnl hover-lift hover-glow" data-pnl-card hidden data-reveal>
             <span class="stat-card__k" data-pnl-label>Total P&amp;L</span>
-            <span class="stat-card__v stat-card__v--pnl" data-pnl-value>—</span>
+            <span class="stat-card__v stat-card__v--pnl" data-pnl-value>…</span>
             <span class="stat-card__hint" data-pnl-sublabel></span>
           </div>
           <div class="stat-card card stat-card--meta hover-lift hover-glow" data-reveal>
             <span class="stat-card__k">Last reported</span>
-            <span class="stat-card__v stat-card__v--sm" data-perf-updated>—</span>
+            <span class="stat-card__v stat-card__v--sm" data-perf-updated>…</span>
             <span class="stat-card__status" data-perf-status></span>
           </div>
         </div>
@@ -346,7 +347,7 @@
             </div>
             <div class="chart-legend">
               <span class="chart-legend__item chart-legend__item--growth">Daily balance</span>
-              <span class="chart-legend__item chart-legend__item--monthly" data-chart-legend-monthly hidden>Month-end (pre-daily)</span>
+              <span class="chart-legend__item chart-legend__item--monthly" data-chart-legend-monthly hidden>Month end (before daily)</span>
             </div>
           </div>
           <div class="chart" data-chart>
@@ -375,7 +376,7 @@
         <div class="monthly-card card hover-lift" data-monthly-wrap hidden data-reveal>
           <div class="monthly-card__head">
             <h3>Monthly P&amp;L</h3>
-            <p class="monthly-card__note" data-monthly-note>One row per calendar month since tracking began. Missing months stay marked as pending — never estimated.</p>
+            <p class="monthly-card__note" data-monthly-note>One row per calendar month since tracking began. Missing months stay marked as pending, never estimated.</p>
           </div>
           <div class="monthly-table-wrap">
             <table class="monthly-table">
@@ -394,7 +395,7 @@
 
         <div class="section__cta section__cta--center" data-reveal>
           <p class="section__cta-lead">Like what you see? Run AuremAI on your own MT5 terminal.</p>
-          <a class="btn btn--gold btn--lg" href="#" data-telegram data-macro-action data-confirm-label="Tap again — Get started">Get started</a>
+          <a class="btn btn--gold btn--lg" href="#" data-telegram data-macro-action data-confirm-label="Tap again to get started">Get started</a>
         </div>
       </div>
     </section>
@@ -418,7 +419,7 @@
             <h2 data-reveal>See exactly what's feeding the signal.</h2>
             <p class="section__lead" data-reveal>
               This is the transparency layer. Every item below is something the system
-              actually weighed — with its category, directional bias, and time.
+              actually weighed, with its category, directional bias, and time.
             </p>
           </div>
           <div class="news__bull-slot" id="news-bull-anchor" aria-hidden="true"></div>
@@ -434,7 +435,7 @@
 
         <div class="section__cta section__cta--center" data-reveal>
           <p class="section__cta-lead">This is what the system reads every day.</p>
-          <a class="btn btn--gold btn--lg" href="#" data-telegram data-macro-action data-confirm-label="Tap again — Get started">Get started</a>
+          <a class="btn btn--gold btn--lg" href="#" data-telegram data-macro-action data-confirm-label="Tap again to get started">Get started</a>
         </div>
       </div>
     </section>
@@ -458,7 +459,7 @@
             <span class="eyebrow" data-reveal>How it works</span>
             <h2 data-reveal>Four steps to remove yourself from the equation.</h2>
             <p class="section__lead" data-reveal>
-              Follow the full onboarding path — including our official broker partner — so
+              Follow the full onboarding path, including our official broker partner, so
               your account matches the live performance you see on this page.
             </p>
           </div>
@@ -493,12 +494,12 @@
           <li class="step" data-reveal>
             <span class="step__n">04</span>
             <h3>The system reads the signal and manages risk</h3>
-            <p>From there it runs on its own: reading the live signal and adjusting position size and take-profit on every order, automatically.</p>
+            <p>From there it runs on its own: reading the live signal and adjusting position size and take profit on every order, automatically.</p>
           </li>
         </ol>
 
         <div class="section__cta section__cta--center" data-reveal>
-          <a class="btn btn--gold btn--lg" href="#" data-telegram data-macro-action data-confirm-label="Tap again — Get started">Get started</a>
+          <a class="btn btn--gold btn--lg" href="#" data-telegram data-macro-action data-confirm-label="Tap again to get started">Get started</a>
         </div>
       </div>
     </section>
@@ -522,8 +523,8 @@
             <span class="eyebrow" data-reveal>Pricing</span>
             <h2 data-reveal>Pick your term. Cancel the rest of the noise.</h2>
             <p class="section__lead" data-reveal>
-              Every plan is the same system and the same live signal — longer terms
-              simply cost less per month. No martingale, no grid — every trade
+              Every plan is the same system and the same live signal. Longer terms
+              simply cost less per month. No martingale, no grid. Every trade
               carries predefined take profit and stop loss.
             </p>
           </div>
@@ -536,10 +537,10 @@
             <p class="plan__note">Billed monthly. Try it on the live signal.</p>
             <ul class="plan__features">
               <li>Full access to the AuremAI system</li>
-              <li>Live signal-driven position sizing</li>
+              <li>Live signal driven position sizing</li>
               <li>Setup &amp; support over Telegram</li>
             </ul>
-            <a class="btn btn--ghost btn--block" href="https://buy.stripe.com/6oUdR8dHRaCd78q7Lsawo00" data-checkout="monthly" data-macro-action data-confirm-label="Tap again — Get started">Get started</a>
+            <a class="btn btn--ghost btn--block" href="https://buy.stripe.com/6oUdR8dHRaCd78q7Lsawo00" data-checkout="monthly" data-macro-action data-confirm-label="Tap again to get started">Get started</a>
           </div>
 
           <div class="plan card plan--featured hover-lift hover-glow" data-reveal>
@@ -552,7 +553,7 @@
               <li>Priority Telegram support</li>
               <li>Best balance of cost and commitment</li>
             </ul>
-            <a class="btn btn--gold btn--block" href="https://buy.stripe.com/bJe8wO8nxaCdboG3vcawo01" data-checkout="quarterly" data-macro-action data-confirm-label="Tap again — Get started">Get started</a>
+            <a class="btn btn--gold btn--block" href="https://buy.stripe.com/bJe8wO8nxaCdboG3vcawo01" data-checkout="quarterly" data-macro-action data-confirm-label="Tap again to get started">Get started</a>
           </div>
 
           <div class="plan card hover-lift hover-glow" data-reveal>
@@ -564,12 +565,12 @@
               <li>Lowest monthly cost</li>
               <li>A full year on the live signal</li>
             </ul>
-            <a class="btn btn--ghost btn--block" href="https://buy.stripe.com/aFabJ0bzJ7q164m3vcawo02" data-checkout="annual" data-macro-action data-confirm-label="Tap again — Get started">Get started</a>
+            <a class="btn btn--ghost btn--block" href="https://buy.stripe.com/aFabJ0bzJ7q164m3vcawo02" data-checkout="annual" data-macro-action data-confirm-label="Tap again to get started">Get started</a>
           </div>
         </div>
         <p class="pricing__foot">
           Checkout is secure via Stripe. After payment, message <a href="#" data-telegram>@auremAIsupport</a> on Telegram for setup and broker onboarding.
-          After access is confirmed, we send you the VT Markets partner link on Telegram before installing — required for performance parity with our live track record.
+          After access is confirmed, we send you the VT Markets partner link on Telegram before installing. This is required for performance parity with our live track record.
         </p>
       </div>
     </section>
@@ -589,7 +590,7 @@
         <div class="section__head faq__head" data-reveal-group>
           <span class="eyebrow">FAQ</span>
           <h2>Questions, answered straight.</h2>
-          <p class="section__lead">Everything you need to evaluate AuremAI before you connect an account — setup, risk, delivery, and how the macro signal drives position sizing.</p>
+          <p class="section__lead">Everything you need to evaluate AuremAI before you connect an account: setup, risk, delivery, and how the macro signal drives position sizing.</p>
         </div>
 
         <div class="faq__deck" data-faq-deck>
@@ -601,7 +602,7 @@
               <div class="faq__rule" aria-hidden="true"></div>
               <div class="faq__body">
                 <div class="faq__body-inner">
-                  <p>AuremAI is AI-enhanced trading software for gold (XAUUSD) — a breakout and liquidity zone strategy that reads a live macro signal to size every position. What you're buying is access to run the system on your MT5 terminal, delivered and supported over Telegram.</p>
+                  <p>AuremAI is AI enhanced trading software for gold (XAUUSD), a breakout and liquidity zone strategy that reads a live macro signal to size every position. What you're buying is access to run the system on your MT5 terminal, delivered and supported over Telegram.</p>
                 </div>
               </div>
             </article>
@@ -612,7 +613,7 @@
               <div class="faq__rule" aria-hidden="true"></div>
               <div class="faq__body">
                 <div class="faq__body-inner">
-                  <p>No. AuremAI does not use martingale or grid logic. Every trade is opened with predefined take profit and stop loss, and risk is managed through fixed lot size or percentage-based sizing — your choice.</p>
+                  <p>No. AuremAI does not use martingale or grid logic. Every trade is opened with predefined take profit and stop loss, and risk is managed through fixed lot size or percentage based sizing, your choice.</p>
                 </div>
               </div>
             </article>
@@ -623,7 +624,7 @@
               <div class="faq__rule" aria-hidden="true"></div>
               <div class="faq__body">
                 <div class="faq__body-inner">
-                  <p>A monitoring process scans for high-relevance gold news every few hours and tags each item with a category (Fed policy carries the most weight, down through key macro, major geopolitics, secondary macro, and general) and a bullish, bearish, or neutral bias. A live endpoint blends recent items using time-decay weighting — influence halves roughly every six hours — into a single bias label, a directional score, and a strength reading.</p>
+                  <p>A monitoring process scans for high relevance gold news every few hours and tags each item with a category (Fed policy carries the most weight, down through key macro, major geopolitics, secondary macro, and general) and a bullish, bearish, or neutral bias. A live endpoint blends recent items using time decay weighting. Influence halves roughly every six hours, into a single bias label, a directional score, and a strength reading.</p>
                 </div>
               </div>
             </article>
@@ -634,7 +635,7 @@
               <div class="faq__rule" aria-hidden="true"></div>
               <div class="faq__body">
                 <div class="faq__body-inner">
-                  <p>Gold only — XAUUSD on MetaTrader 5. The strategy, macro news filter, and execution logic are built and tuned for that single market rather than spread across unrelated pairs.</p>
+                  <p>Gold only: XAUUSD on MetaTrader 5. The strategy, macro news filter, and execution logic are built and tuned for that single market rather than spread across unrelated pairs.</p>
                 </div>
               </div>
             </article>
@@ -645,7 +646,7 @@
               <div class="faq__rule" aria-hidden="true"></div>
               <div class="faq__body">
                 <div class="faq__body-inner">
-                  <p>Yes. The <a href="#track">Track Record</a> section above shows a live trading account — equity, balance, and history — that updates on its own. No purchase or sign-up required to watch it.</p>
+                  <p>Yes. The <a href="#track">Track Record</a> section above shows a live trading account with equity, balance, and history that updates on its own. No purchase or sign up required to watch it.</p>
                 </div>
               </div>
             </article>
@@ -656,7 +657,7 @@
               <div class="faq__rule" aria-hidden="true"></div>
               <div class="faq__body">
                 <div class="faq__body-inner">
-                  <p>Trading carries real risk, including the loss of capital. AuremAI sizes positions to manage risk — using low, medium, and high risk tiers depending on signal strength — but managing risk is not the same as removing it. No system can guarantee a profit, and you should never trade money you can't afford to lose.</p>
+                  <p>Trading carries real risk, including the loss of capital. AuremAI sizes positions to manage risk using low, medium, and high risk tiers depending on signal strength, but managing risk is not the same as removing it. No system can guarantee a profit, and you should never trade money you can't afford to lose.</p>
                 </div>
               </div>
             </article>
@@ -667,7 +668,7 @@
               <div class="faq__rule" aria-hidden="true"></div>
               <div class="faq__body">
                 <div class="faq__body-inner">
-                  <p>No. AuremAI provides software and market signals, not personalised investment advice. You remain responsible for your account, broker relationship, and trading decisions. Consult a licensed adviser if you need regulated guidance.</p>
+                  <p>No. AuremAI provides software and market signals, not personalized investment advice. You remain responsible for your account, broker relationship, and trading decisions. Consult a licensed adviser if you need regulated guidance.</p>
                 </div>
               </div>
             </article>
@@ -689,7 +690,7 @@
               <div class="faq__rule" aria-hidden="true"></div>
               <div class="faq__body">
                 <div class="faq__body-inner">
-                  <p>No. We never take a cut of your trading profits — everything you earn stays in your account. Our revenue comes from your membership subscription and a small share of trading volume when you register with VT Markets through the partner referral link we send you on Telegram. That referral arrangement does not reduce your profits.</p>
+                  <p>No. We never take a cut of your trading profits. Everything you earn stays in your account. Our revenue comes from your membership subscription and a small share of trading volume when you register with VT Markets through the partner referral link we send you on Telegram. That referral arrangement does not reduce your profits.</p>
                 </div>
               </div>
             </article>
@@ -700,7 +701,7 @@
               <div class="faq__rule" aria-hidden="true"></div>
               <div class="faq__body">
                 <div class="faq__body-inner">
-                  <p>The system can run on any MT5 broker, but our live track record is verified on VT Markets. To get the closest match to the performance shown on this page, we strongly recommend registering through the partner link we send you on Telegram — same execution environment as our monitored account.</p>
+                  <p>The system can run on any MT5 broker, but our live track record is verified on VT Markets. To get the closest match to the performance shown on this page, we strongly recommend registering through the partner link we send you on Telegram, the same execution environment as our monitored account.</p>
                 </div>
               </div>
             </article>
@@ -711,7 +712,7 @@
               <div class="faq__rule" aria-hidden="true"></div>
               <div class="faq__body">
                 <div class="faq__body-inner">
-                  <p>There is no fixed minimum published here — it depends on your broker's margin rules and how you size risk. We recommend enough balance to absorb normal drawdown without breaching margin. Support can suggest sensible starting ranges once your account type is confirmed on Telegram.</p>
+                  <p>There is no fixed minimum published here. It depends on your broker's margin rules and how you size risk. We recommend enough balance to absorb normal drawdown without breaching margin. Support can suggest sensible starting ranges once your account type is confirmed on Telegram.</p>
                 </div>
               </div>
             </article>
@@ -722,7 +723,7 @@
               <div class="faq__rule" aria-hidden="true"></div>
               <div class="faq__body">
                 <div class="faq__body-inner">
-                  <p>One. Each membership licenses a single live MT5 account. During onboarding you register that specific account with us — the license is bound to it and cannot be used on a second account without contacting support.</p>
+                  <p>One. Each membership licenses a single live MT5 account. During onboarding you register that specific account with us. The license is bound to it and cannot be used on a second account without contacting support.</p>
                 </div>
               </div>
             </article>
@@ -744,7 +745,7 @@
               <div class="faq__rule" aria-hidden="true"></div>
               <div class="faq__body">
                 <div class="faq__body-inner">
-                  <p>News is scanned every few hours; each item is weighted with time decay so recent headlines carry more influence. The live endpoint on this site reflects the current blended bias, score, and strength reading — visible in the Signal section without logging in.</p>
+                  <p>News is scanned every few hours. Each item is weighted with time decay so recent headlines carry more influence. The live endpoint on this site reflects the current blended bias, score, and strength reading, visible in the Signal section without logging in.</p>
                 </div>
               </div>
             </article>
@@ -782,7 +783,7 @@
         </div>
 
         <div class="section__cta section__cta--center faq__cta" data-reveal>
-          <a class="btn btn--gold btn--lg" href="#" data-telegram data-macro-action data-confirm-label="Tap again — Get started">Get started</a>
+          <a class="btn btn--gold btn--lg" href="#" data-telegram data-macro-action data-confirm-label="Tap again to get started">Get started</a>
         </div>
       </div>
     </section>
@@ -795,7 +796,7 @@
         <span class="brand__word brand__word--light"><img class="footer__mark" src="assets/logo.svg" alt="" /><span class="brand__aurem">Aurem</span><span class="brand__ai">AI</span></span>
         <p class="footer__tag">The signal arrives before the price does.</p>
         <p class="footer__powered">Powered by <strong>TFS Management Ltd</strong></p>
-        <a class="btn btn--gold" href="#" data-telegram data-macro-action data-confirm-label="Tap again — Get started">Get started</a>
+        <a class="btn btn--gold" href="#" data-telegram data-macro-action data-confirm-label="Tap again to get started">Get started</a>
       </div>
       <p class="footer__disclaimer">
         Trading in financial instruments carries a risk of loss, including total loss
@@ -813,8 +814,8 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.min.js"></script>
   <script src="js/config.js?v=20260630a"></script>
   <script src="js/api.js?v=20260702"></script>
-  <script src="js/app.js?v=20260702b"></script>
-  <script src="js/motion.js"></script>
+  <script src="js/app.js?v=20260701a"></script>
+  <script src="js/motion.js?v=20260701a"></script>
   <script src="js/scene-three.js"></script>
   <script src="js/scroll-cinema.js?v=20260713"></script>
   <script src="js/faq-deck.js?v=20260713"></script>

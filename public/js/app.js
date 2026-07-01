@@ -11,7 +11,7 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 const fmtUSD = (n, dp = 2) =>
   typeof n === "number"
     ? n.toLocaleString("en-US", { minimumFractionDigits: dp, maximumFractionDigits: dp })
-    : "—";
+    : "…";
 
 function timeAgo(iso) {
   const t = new Date(iso).getTime();
@@ -25,7 +25,7 @@ function timeAgo(iso) {
 }
 
 function formatMonthLabel(ym) {
-  if (!ym || typeof ym !== "string") return "—";
+  if (!ym || typeof ym !== "string") return "…";
   const [y, m] = ym.split("-").map(Number);
   if (!y || !m) return ym;
   return new Date(y, m - 1, 1).toLocaleDateString("en-US", { month: "short", year: "numeric" });
@@ -206,7 +206,7 @@ function formatTrackingStart(ymd) {
 }
 
 function fmtSignedUSD(amount) {
-  if (typeof amount !== "number") return "—";
+  if (typeof amount !== "number") return "…";
   const sign = amount >= 0 ? "+" : "−";
   return `${sign}$${fmtUSD(Math.abs(amount))}`;
 }
@@ -230,7 +230,7 @@ function asApiNumber(value) {
 /** Ticker daily $ change — formats API `change` as-is (no derivation from price). */
 function fmtApiChangeUsd(amount) {
   const n = asApiNumber(amount);
-  if (n === null) return "—";
+  if (n === null) return "…";
   const sign = n >= 0 ? "+" : "−";
   return `${sign}$${fmtUSD(Math.abs(n))}`;
 }
@@ -316,7 +316,7 @@ function updateHistoricalDrawdownBadge(perf) {
   const range = perf?.historical_drawdown_range_pct;
   if (range && typeof range.min === "number" && typeof range.max === "number") {
     el.textContent =
-      `Historical daily drawdown: ${formatDrawdownRangePct(range.min)}%–${formatDrawdownRangePct(range.max)}%`;
+      `Historical daily drawdown: ${formatDrawdownRangePct(range.min)}% to ${formatDrawdownRangePct(range.max)}%`;
     el.hidden = false;
   } else {
     el.hidden = true;
@@ -715,8 +715,8 @@ async function refreshBias() {
   if (!data || typeof data.directional_score !== "number") {
     if (label) { label.textContent = "unavailable"; label.removeAttribute("data-state"); }
     if (meta) meta.textContent = "Signal feed unavailable";
-    if (dirEl) dirEl.textContent = "—";
-    if (strEl) strEl.textContent = "—";
+    if (dirEl) dirEl.textContent = "…";
+    if (strEl) strEl.textContent = "…";
     if (fill) fill.style.strokeDashoffset = GAUGE_LEN;
     return;
   }
@@ -732,10 +732,10 @@ async function refreshBias() {
       bias === "bullish" ? "var(--bull)" : bias === "bearish" ? "var(--bear)" : "var(--neutral)";
   }
   if (label) { label.textContent = bias; label.setAttribute("data-state", bias); }
-  if (meta) meta.textContent = `Based on ${data.based_on_items ?? "—"} recent items`;
+  if (meta) meta.textContent = `Based on ${data.based_on_items ?? "…"} recent items`;
   if (dirEl) dirEl.textContent = score.toFixed(1);
   if (strEl) strEl.textContent =
-    typeof data.strength_abs === "number" ? `${data.strength_abs.toFixed(1)}/100` : "—";
+    typeof data.strength_abs === "number" ? `${data.strength_abs.toFixed(1)}/100` : "…";
   if (updatedEl && data.updated_at) updatedEl.textContent = `Updated ${timeAgo(data.updated_at)}.`;
 }
 
@@ -756,7 +756,7 @@ async function refreshPerformance() {
 
   if (!data || !data.available) {
     [equityEl, balanceEl].forEach((el) => el && (el.textContent = "unavailable"));
-    if (updatedEl) updatedEl.textContent = "—";
+    if (updatedEl) updatedEl.textContent = "…";
     if (statusEl) { statusEl.textContent = "Account feed unavailable"; statusEl.className = "stat-card__status"; }
     if (staleEl) staleEl.hidden = true;
     if (pnlCard) pnlCard.hidden = true;
@@ -770,7 +770,7 @@ async function refreshPerformance() {
 
   if (staleEl) staleEl.hidden = !data.stale;
   if (statusEl) {
-    statusEl.textContent = data.stale ? "Stale — awaiting refresh" : "Live";
+    statusEl.textContent = data.stale ? "Stale, awaiting refresh" : "Live";
     statusEl.className = "stat-card__status " + (data.stale ? "is-stale" : "is-live");
   }
 
@@ -1087,7 +1087,7 @@ async function refreshMonthly() {
     if (hasSinceInceptionPnl(perf)) {
       note.textContent = `Since ${since} · $${fmtUSD(data.initial_balance)} starting balance. Monthly returns below are confirmed on balance at each month start.`;
     } else {
-      note.textContent = `Since ${since} · $${fmtUSD(data.initial_balance)} starting balance. Missing months stay marked as pending — never estimated.`;
+      note.textContent = `Since ${since} · $${fmtUSD(data.initial_balance)} starting balance. Missing months stay marked as pending, never estimated.`;
     }
   }
 
@@ -1191,7 +1191,7 @@ async function refreshNews() {
   if (!list) return;
 
   if (!data || !Array.isArray(data.items) || data.items.length === 0) {
-    list.innerHTML = `<p class="news__empty">News feed unavailable right now — check back shortly.</p>`;
+    list.innerHTML = `<p class="news__empty">News feed unavailable right now. Check back shortly.</p>`;
     bindNewsRail();
     return;
   }

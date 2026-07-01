@@ -113,7 +113,7 @@ function initMacroConfirm() {
         pending.delete(btn);
         btn.classList.remove("is-confirming");
         btn.textContent = defaultLabel;
-        showToast("Confirmed — opening…");
+        showToast("Confirmed. Opening…");
 
         const url = btn.getAttribute("href");
         if (url?.startsWith("https://buy.stripe.com")) {
