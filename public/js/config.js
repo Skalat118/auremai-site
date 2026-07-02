@@ -42,6 +42,9 @@ const REAL_MONTHLY_RETURN_PCT = {
 // Max floating drawdown shown on the equity line (never above this %).
 const MAX_CHART_DRAWDOWN_PCT = 10;
 
+/** Balance drop above this ratio vs prior point = wrong MT5 account attached (ignore tail). */
+const ACCOUNT_MIGRATION_CLIFF_RATIO = 0.5;
+
 /**
  * Pricing tiers — edit prices and paste Stripe Payment Links below.
  * stripeUrl: full https://buy.stripe.com/… link (leave "" until ready).

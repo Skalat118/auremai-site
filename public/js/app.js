@@ -281,9 +281,125 @@ function monthRangeFromStart(trackingStart) {
   return months;
 }
 
-function monthlyTableRowsFromApi(data) {
-  const rows = Array.isArray(data?.months) ? data.months : [];
-  return [...rows].sort((a, b) => String(a.month).localeCompare(String(b.month)));
+function dailyRowsFromResponse(data) {
+  if (!data) return [];
+  if (Array.isArray(data)) return data;
+  if (Array.isArray(data.days)) return data.days;
+  return [];
+}
+
+function sortDailyRows(rows) {
+  return [...rows].sort((a, b) =>
+    String(a.date ?? a.day ?? "").localeCompare(String(b.date ?? b.day ?? ""))
+  );
+}
+
+function isAccountMigrationCliff(prevBalance, nextBalance) {
+  if (typeof prevBalance !== "number" || typeof nextBalance !== "number") return false;
+  if (prevBalance < 500) return false;
+  return nextBalance < prevBalance * ACCOUNT_MIGRATION_CLIFF_RATIO;
+}
+
+/** Drop daily rows after a mistaken MT5 account switch (e.g. $10k → $500). */
+function filterMigrationDailyRows(rows) {
+  const sorted = sortDailyRows(rows);
+  const out = [];
+  for (const row of sorted) {
+    const balance = typeof row.balance === "number" ? row.balance : null;
+    if (out.length && balance !== null) {
+      const prevBalance = out[out.length - 1].balance;
+      if (isAccountMigrationCliff(prevBalance, balance)) break;
+    }
+    out.push(row);
+  }
+  return out;
+}
+
+/** Drop monthly rows corrupted by an account switch on an in-progress month. */
+function filterMigrationMonthlyRows(rows) {
+  const sorted = [...rows].sort((a, b) => String(a.month).localeCompare(String(b.month)));
+  const out = [];
+  for (const row of sorted) {
+    if (out.length && row.available && typeof row.balance === "number") {
+      const prev = out[out.length - 1];
+      if (
+        typeof prev.balance === "number" &&
+        (isAccountMigrationCliff(prev.balance, row.balance) ||
+          (row.in_progress && typeof row.pnl_percent === "number" && row.pnl_percent <= -30))
+      ) {
+        continue;
+      }
+    }
+    out.push(row);
+  }
+  return out;
+}
+
+function sanitizePerformanceSnapshot(perf, dailyRows) {
+  if (!perf?.available || typeof perf.initial_balance !== "number") return perf;
+  const goodDaily = filterMigrationDailyRows(dailyRows);
+  const last = goodDaily[goodDaily.length - 1];
+  if (!last || typeof last.balance !== "number") return perf;
+  if (!isAccountMigrationCliff(last.balance, perf.balance)) return perf;
+
+  const balance = last.balance;
+  const pnlAmount = Math.round((balance - perf.initial_balance) * 100) / 100;
+  const pnlPercent =
+    perf.initial_balance > 0
+      ? Math.round((pnlAmount / perf.initial_balance) * 10000) / 100
+      : perf.pnl_percent;
+
+  return {
+    ...perf,
+    balance,
+    equity: balance,
+    pnl_amount: pnlAmount,
+    pnl_percent: pnlPercent,
+  };
+}
+
+function monthlyTableRowsFromApi(data, dailyData = null) {
+  let rows = filterMigrationMonthlyRows(Array.isArray(data?.months) ? data.months : []);
+  const dailyRows = filterMigrationDailyRows(dailyRowsFromResponse(dailyData));
+  const lastDay = dailyRows[dailyRows.length - 1];
+
+  if (lastDay?.date && typeof lastDay.balance === "number") {
+    const monthKey = lastDay.date.slice(0, 7);
+    const hasMonth = rows.some((row) => row.month === monthKey);
+    const rawMonths = Array.isArray(data?.months) ? data.months : [];
+    const rawMonth = rawMonths.find((row) => row.month === monthKey);
+    const prevBalance =
+      rows.filter((row) => row.month < monthKey).pop()?.balance ?? data?.initial_balance;
+    const recoveredBadMonth =
+      rawMonth &&
+      !hasMonth &&
+      typeof prevBalance === "number" &&
+      typeof rawMonth.balance === "number" &&
+      isAccountMigrationCliff(prevBalance, rawMonth.balance);
+
+    if (!hasMonth && (lastDay.in_progress || recoveredBadMonth)) {
+      rows.push({
+        month: monthKey,
+        balance: lastDay.balance,
+        pnl_amount:
+          typeof lastDay.pnl_amount === "number"
+            ? lastDay.pnl_amount
+            : typeof prevBalance === "number"
+              ? Math.round((lastDay.balance - prevBalance) * 100) / 100
+              : null,
+        pnl_percent:
+          typeof lastDay.pnl_percent === "number"
+            ? lastDay.pnl_percent
+            : typeof prevBalance === "number" && prevBalance > 0
+              ? Math.round(((lastDay.balance - prevBalance) / prevBalance) * 10000) / 100
+              : null,
+        in_progress: !!lastDay.in_progress || !!recoveredBadMonth,
+        available: true,
+      });
+    }
+  }
+
+  return rows.sort((a, b) => String(a.month).localeCompare(String(b.month)));
 }
 
 function formatMonthlyPnlCell(row) {
@@ -337,12 +453,6 @@ function updateHistoricalDrawdownBadge(perf) {
   }
 }
 
-function dailyRowsFromResponse(data) {
-  if (!data) return [];
-  if (Array.isArray(data)) return data;
-  if (Array.isArray(data.days)) return data.days;
-  return [];
-}
 
 function dateToChartTimestamp(dateStr) {
   const d = new Date(`${dateStr}T00:00:00`);
@@ -352,7 +462,7 @@ function dateToChartTimestamp(dateStr) {
 }
 
 function parseDailyChartPoints(dailyData, initialBalance) {
-  const rows = dailyRowsFromResponse(dailyData);
+  const rows = filterMigrationDailyRows(dailyRowsFromResponse(dailyData));
   let prevBalance = initialBalance;
 
   return rows
@@ -396,6 +506,9 @@ function parseDailyChartPoints(dailyData, initialBalance) {
 function buildMonthlyChartPoints(monthlyData, perf, beforeDayStart = null) {
   if (!monthlyData?.months?.length || typeof perf?.initial_balance !== "number") return [];
 
+  const months = filterMigrationMonthlyRows(monthlyData.months);
+  if (!months.length) return [];
+
   const trackingStart = perf.tracking_start ?? monthlyData.tracking_start;
   const startT = new Date(`${trackingStart}T00:00:00`).getTime();
   const initial = perf.initial_balance;
@@ -404,11 +517,11 @@ function buildMonthlyChartPoints(monthlyData, perf, beforeDayStart = null) {
     b: initial,
     isStart: true,
     isMonthEnd: false,
-    month: monthlyData.months[0]?.month ?? null,
+    month: months[0]?.month ?? null,
     segment: "monthly",
   }];
 
-  for (const row of monthlyData.months) {
+  for (const row of months) {
     if (!row.available || typeof row.balance !== "number") continue;
     const t = monthEndTimestamp(row.month);
     if (beforeDayStart != null && t >= beforeDayStart) continue;
@@ -480,7 +593,7 @@ function updateChartDailyStat(dailyData) {
   const el = $("[data-chart-daily-stat]");
   if (!el) return;
 
-  const rows = dailyRowsFromResponse(dailyData);
+  const rows = filterMigrationDailyRows(dailyRowsFromResponse(dailyData));
   if (!rows.length) {
     el.hidden = true;
     return;
@@ -754,7 +867,8 @@ async function refreshBias() {
 
 /* ------------------------------- performance ------------------------------- */
 async function refreshPerformance() {
-  const data = await api.performance();
+  const [rawPerf, dailyData] = await Promise.all([api.performance(), api.daily()]);
+  const data = sanitizePerformanceSnapshot(rawPerf, dailyRowsFromResponse(dailyData));
   lastPerformance = data;
   const equityEl = $("[data-equity]");
   const balanceEl = $("[data-balance]");
@@ -1040,7 +1154,8 @@ function renderDrawdownChart(svg, empty, dailyPoints) {
 async function refreshHistory() {
   let perf = lastPerformance;
   if (!perf?.tracking_start || typeof perf?.initial_balance !== "number") {
-    perf = (await api.performance()) ?? perf;
+    const [rawPerf, dailyData] = await Promise.all([api.performance(), api.daily()]);
+    perf = sanitizePerformanceSnapshot(rawPerf, dailyRowsFromResponse(dailyData)) ?? perf;
     if (perf) lastPerformance = perf;
   }
 
@@ -1061,25 +1176,48 @@ async function refreshHistory() {
   }
 
   const [monthlyData, dailyData] = await Promise.all([api.monthly(), api.daily()]);
-  const monthlyNorm = { ...monthlyData, months: monthlyTableRowsFromApi(monthlyData) };
-  const dailyPoints = parseDailyChartPoints(dailyData, perf.initial_balance);
+  const perfSanitized = sanitizePerformanceSnapshot(perf, dailyRowsFromResponse(dailyData));
+  if (perfSanitized) lastPerformance = perfSanitized;
+
+  const monthlyNorm = {
+    ...monthlyData,
+    months: monthlyTableRowsFromApi(monthlyData, dailyData),
+  };
+  const dailyPoints = parseDailyChartPoints(dailyData, perfSanitized.initial_balance);
   const firstDailyDayStart = dailyPoints[0]?.date
     ? new Date(`${dailyPoints[0].date}T00:00:00`).getTime()
     : null;
-  const monthlyPoints = buildMonthlyChartPoints(monthlyNorm, perf, firstDailyDayStart);
+  const monthlyPoints = buildMonthlyChartPoints(monthlyNorm, perfSanitized, firstDailyDayStart);
 
   renderGrowthChart(svg, empty, {
     monthlyPoints,
     dailyPoints,
-    initial: perf.initial_balance,
+    initial: perfSanitized.initial_balance,
   });
   renderDrawdownChart(ddSvg, ddEmpty, dailyPoints);
   updateChartDailyStat(dailyData);
+
+  if (perfSanitized && hasSinceInceptionPnl(perfSanitized)) {
+    const equityEl = $("[data-equity]");
+    const balanceEl = $("[data-balance]");
+    const pnlValue = $("[data-pnl-value]");
+    const pnlSub = $("[data-pnl-sublabel]");
+    if (equityEl) equityEl.textContent = `$${fmtUSD(perfSanitized.equity)}`;
+    if (balanceEl) balanceEl.textContent = `$${fmtUSD(perfSanitized.balance)}`;
+    if (pnlValue && pnlSub) {
+      const since = formatTrackingStart(perfSanitized.tracking_start);
+      const signPct = perfSanitized.pnl_percent >= 0 ? "+" : "−";
+      pnlValue.textContent = fmtSignedUSD(perfSanitized.pnl_amount);
+      pnlValue.className =
+        "stat-card__v stat-card__v--pnl " + (perfSanitized.pnl_amount >= 0 ? "is-up" : "is-down");
+      pnlSub.textContent = `${signPct}${Math.abs(perfSanitized.pnl_percent).toFixed(1)}% since ${since}`;
+    }
+  }
 }
 
 /* ------------------------------- monthly P&L ------------------------------- */
 async function refreshMonthly() {
-  const data = await api.monthly();
+  const [data, dailyData] = await Promise.all([api.monthly(), api.daily()]);
   const wrap = $("[data-monthly-wrap]");
   const body = $("[data-monthly-body]");
   const empty = $("[data-monthly-empty]");
@@ -1092,7 +1230,7 @@ async function refreshMonthly() {
     return;
   }
 
-  const rows = monthlyTableRowsFromApi(data);
+  const rows = monthlyTableRowsFromApi(data, dailyData);
 
   revealDynamic(wrap);
   if (empty) empty.hidden = true;
