@@ -1099,7 +1099,7 @@ img { max-width: 100%; display: block; }
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 0;
 }
 .step {
@@ -1152,6 +1152,15 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--violet-400);
+}
+.partner-inline--link {
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.partner-inline--link:hover {
+  border-color: rgba(139, 92, 246, 0.35);
+  background: rgba(139, 92, 246, 0.06);
 }
 .step__note {
   margin: 14px 0 0;

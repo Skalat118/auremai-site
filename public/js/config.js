@@ -15,6 +15,7 @@ const COMMUNITY_TELEGRAM_URL = "https://t.me/+F5bnXj-wqW0wZTBk";
 
 // TODO: replace with your VT Markets IB / affiliate registration link when ready.
 const VT_MARKETS_PARTNER_URL = "https://www.vtmarkets.com/";
+const CHEAPVPS_URL = "https://cheapvps.co/billing/aff.php?aff=1967";
 
 // Polling cadences (ms). Price/bias are fast; the rest are slower.
 const POLL = {

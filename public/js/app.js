@@ -1226,6 +1226,7 @@ function wireStaticLinks() {
 
   $$("[data-telegram]").forEach((el) => (el.href = TELEGRAM_URL));
   $$("[data-community-telegram]").forEach((el) => (el.href = COMMUNITY_TELEGRAM_URL));
+  $$("[data-cheapvps]").forEach((el) => (el.href = CHEAPVPS_URL));
   $$("[data-vt-markets]").forEach((el) => (el.href = VT_MARKETS_PARTNER_URL));
 
   // Checkout CTAs handled by motion.js (macro confirm → Telegram).
